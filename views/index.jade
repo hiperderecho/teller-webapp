@@ -1,0 +1,13 @@
+extends ./layout.jade
+
+block content
+	div.content-fix-top.js-content(data-api-url="#{apiUrl}")
+		h4 Resultados
+		div.results
+			table(data-toggle="table",data-url="#{apiUrl}api/questions")
+				thead
+					tr
+						th(data-field="title") Título
+						th(data-field="publicAuthorEmail") Autor
+						th(data-field="content") Contenido
+						th(data-field="status") Estatus

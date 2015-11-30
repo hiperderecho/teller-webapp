@@ -1,0 +1,17 @@
+{
+  "name": "teller-webapp",
+  "version": "0.0.0",
+  "description": "Teller Web App",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Juan La Jara, Hiperderecho",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.6.0",
+    "express": "^4.13.3",
+    "express-minify": "^0.1.6",
+    "jade": "^1.11.0"
+  }
+}
