@@ -1,7 +1,7 @@
 extends ./layout.jade
 
 block content
-	div#cta-form-holder.js-content.content-fix-top(data-view="sendQuestion")
+	div#cta-form-holder.js-content.content-fix-top(data-api-url="#{apiUrl}",data-view="sendQuestion")
 		form#ctaForm
 			.form-group
 				label(for='ctaFormAgency') Entidad del Estado&times;
