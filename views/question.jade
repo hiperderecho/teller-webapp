@@ -1,0 +1,19 @@
+extends ./layout.jade
+
+block content
+	h4 Pregunta
+	div.content-fix-top.js-content(data-api-url="#{apiUrl}",data-question-id="#{id}",data-view="question")
+		div.question
+			h4=question.title
+			p=question.publicAuthorEmail
+			p=question.content
+			p=question.status
+		- if ( !!answers.length )
+			div.answers
+				- each answer in answers
+					div.answer
+						p=answer.formattedDate
+						p=answer.content
+						- if ( !!answer.attachment )
+							a(href=answer.attachmentUrl)
+								div(class=answer.attachmentMimeType) Direct Link

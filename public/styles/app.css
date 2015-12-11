@@ -6,3 +6,31 @@
 	position: relative;
 	top: 20px;
 }
+
+/*Index*/
+
+.index-holder .question {
+	position: relative;
+}
+.index-holder .question a:hover > h4 {
+	text-decoration: underline;
+}
+.index-holder .question h4 {
+	display: inline-block;
+	margin: 0;
+	vertical-align: top;
+}
+.index-holder .question span {
+	display: inline-block;
+	vertical-align: top;
+}
+.index-holder .question span:before {
+	content: "(";
+}
+.index-holder .question span:after {
+	content: ")";
+}
+.index-holder .question p {
+	display: inline-block;
+	vertical-align: top;
+}

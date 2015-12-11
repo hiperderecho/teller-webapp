@@ -1,13 +1,12 @@
 extends ./layout.jade
 
 block content
-	div.content-fix-top.js-content(data-api-url="#{apiUrl}")
+	div.content-fix-top.index-holder.js-content(data-api-url="#{apiUrl}",data-view="index")
 		h4 Resultados
-		div.results
-			table(data-toggle="table",data-url="#{apiUrl}api/questions")
-				thead
-					tr
-						th(data-field="title") Título
-						th(data-field="publicAuthorEmail") Autor
-						th(data-field="content") Contenido
-						th(data-field="status") Estatus
+		div.results.js-questions
+			- each question in questions
+				div(data-id=question.id,class="question")
+					a(href="/preguntas/" + question.id + "/" + question.slug)
+						h4=question.title
+						span=agencies[question.agencyId]
+						p=question.formattedDate

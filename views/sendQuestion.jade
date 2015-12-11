@@ -1,0 +1,27 @@
+extends ./layout.jade
+
+block content
+	div#cta-form-holder.js-content.content-fix-top(data-view="sendQuestion")
+		form#ctaForm
+			.form-group
+				label(for='ctaFormAgency') Entidad del Estado&times;
+				select#ctaFormAgency.form-control(name='agencyId')
+					option(value='') Elija una
+					- each agency in agencies
+						option(value=agency.id)=agency.name
+			.form-group
+				label(for='ctaFormAuthorFullName') Nombre completo&times; (mínimo 5 carácteres, máximo 52)
+				input#ctaFormAuthorFullName.form-control(type='text',placeholder='Nombre completo',name='authorFullName')
+			.form-group
+				label(for='ctaFormAuthor') Email&times; (nunca lo usaremos para publicidad)
+				input#ctaFormAuthor.form-control(type='email',placeholder='Email',name='author')
+			.form-group
+				label(for='ctaFormTitle') Título&times; (mínimo 5 carácteres, máximo 52)
+				input#ctaFormTitle.form-control(type='text',placeholder='Título',name='title')
+			.form-group
+				label(for='ctaContent') Mensaje&times; (mínimo 40 carácteres, máximo 400)
+				textarea#ctaFormContent.form-control(rows='3',placeholder='Mensaje',name='content')
+			.form-group
+				p.collapse.js-ctaFormErrorMessage Por favor revisa los campos
+				p.collapse.js-ctaFormSuccessMessage Tu pregunta fue enviada
+			button.btn.btn-default(type='submit') Enviar

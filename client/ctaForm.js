@@ -1,30 +1,14 @@
-var app = function () {
+var validators = require('./utils/validators');
+
+module.exports = function ( app ) {
+	console.log( 'loading ctaForm' );
 	var ctaFormAgency         = $('#ctaFormAgency')
 	  , ctaForm               = $('#ctaForm')
 	  , ctaFormErrorMessage   = $('p.js-ctaFormErrorMessage')
 	  , ctaFormSuccessMessage = $('p.js-ctaFormSuccessMessage')
-	  , apiBaseUrl            = $('div.js-content').data('api-url')
-	  , apiQuestionsUrl       = apiBaseUrl + 'api/questions'
-	  , apiAgenciesUrl        = apiBaseUrl + 'api/agencies'
-	  , validators            = {}
-	  , sendQuestionShorcut   = window.location.hash === '#/envia-una-pregunta'
 	// fn declarations
-	  , populateAgencies
 	  , onCtaFormSubmit
 	  ;
-
-	validators.text        = /[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+/;
-	validators.fullname    = /^[a-záéíóúÁÉÍÓÚñÑA-Z]([-']?[a-záéíóúÁÉÍÓÚñÑA-Z]+)*( [a-záéíóúÁÉÍÓÚñÑA-Z]([-']?[a-záéíóúÁÉÍÓÚñÑA-Z]+)*)+$/;
-	validators.email       = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-	validators.phonenumber = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,3}$/;
-
-	populateAgencies = function ( agencies ) {
-
-		agencies.forEach( function ( agency ) {
-			var option = $('<option>');
-			option.prop('value', agency.id ).text( agency.name ).appendTo( ctaFormAgency );
-		} );
-	};
 
 	onCtaFormSubmit = function ( e ) {
 		var $this   = $(this)
@@ -33,6 +17,9 @@ var app = function () {
 		e.preventDefault();
 
 		isValid.push( !!$('#ctaFormAgency').find('option:selected').val() );
+		isValid.push( validators.fullname.test( ctaForm.find('#ctaFormAuthorFullName').val() )
+		              && ctaForm.find('#ctaFormAuthorFullName').val().length < 53
+		              && ctaForm.find('#ctaFormAuthorFullName').val().length > 4 );
 		isValid.push( validators.email.test( ctaForm.find('#ctaFormAuthor').val() ) );
 		isValid.push( validators.text.test( ctaForm.find('#ctaFormTitle').val() )
 		              && ctaForm.find('#ctaFormTitle').val().length < 53
@@ -44,11 +31,12 @@ var app = function () {
 		if ( isValid.every( function ( e ) { return e; } ) ) {
 
 			ctaFormSuccessMessage.show();
-			$.post( apiQuestionsUrl, $this.serialize() )
+			$.post( app.apiQuestionsUrl, $this.serialize() )
 			.then( function ( result ) {
 
 				setTimeout( function () {
-					window.location.reload();
+
+					window.location.href = '/';
 				}, 400 );
 			} );
 		}
@@ -63,18 +51,7 @@ var app = function () {
 		ctaFormErrorMessage.fadeOut();
 	} );
 
-	$.get( apiAgenciesUrl )
-	.then( populateAgencies );
-
 	ctaForm
 	.on('submit', onCtaFormSubmit );
 
-	if ( sendQuestionShorcut ) {
-
-		setTimeout( function () {
-			$('#cta-form-holder').modal({keyboard: false});
-		}, 400 );
-	}
 };
-
-$( app );
