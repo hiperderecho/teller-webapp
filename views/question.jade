@@ -97,6 +97,8 @@ block content
 									| Fallida
 							.form-group
 								a.js-author-secret-form-send-again(href="#") Soy el autor de esta pregunta y quiero que me envíen de nuevo el código de autor a mi correo
+							.form-group.js-change-status-form-error-message.collapse
+								label Por favor revisa los campos
 							button.btn.btn-default(type='submit') Enviar
 
 		#answer-question-form-holder.modal.fade(tabindex='-1',role='dialog',aria-labelledby='responderPregunta')
@@ -119,4 +121,6 @@ block content
 								textarea#answerQuestionFormContent.form-control(rows='3',placeholder='Mensaje',name='content')
 							.form-group
 								a.js-author-secret-form-send-again(href="#") Soy el autor de esta pregunta y quiero que me envíen de nuevo el código de autor a mi correo
+							.form-group.js-answer-question-form-error-message.collapse
+								label Por favor revisa los campos
 							button.btn.btn-default(type='submit') Enviar

@@ -43,6 +43,15 @@ module.exports = function ( request, response ) {
 	} )
 	.catch( function ( error ) {
 
+		if ( error && error.error && error.error.error ) {
+			if ( error.error.error.match('The query did not find a document') ) {
+				response.status(404).render( '404' );
+				return;
+			}
+			response.status(500).render( '500', { error: error.stack } );
+			return;
+		}
+
 		response.status(500).render( '500', { error: error.stack } );
 	} );
 };

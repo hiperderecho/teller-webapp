@@ -31,7 +31,6 @@ module.exports = function ( app ) {
 			$( createElement(  buildNoResultsAndCtaMessage() ) ).appendTo( questionsHolder );
 			return;
 		}
-		console.log( 'results', results );
 
 		results.forEach( function ( result ) {
 			var questions
@@ -165,7 +164,6 @@ module.exports = function ( app ) {
 			$( createElement(  buildNoResultsMessage() ) ).appendTo( questionsHolder );
 			return;
 		}
-		console.log( 'results', results );
 
 		results.forEach( function ( result ) {
 			var questions
@@ -239,18 +237,21 @@ var charCount           = require('./utils/charCount');
 var config              = require('../config');
 
 module.exports = function ( app ) {
-	var questionId               = $('div.js-content').data('question-id')
-	  , holder                   = $('div.js-content')
-	  , changeStatusForm         = $('#changeStatusForm')
-	  , answerQuestionForm       = $('#answerQuestionForm')
-	  , authorSecretSendAgainBtn = $('a.js-author-secret-form-send-again')
-	  , reloadPageOnModalHide    = false
-	  , authorSecretAlreadyAsked = cookie.parse( window.document.cookie )[ config.webapp.cookieNameSpace ]
+	var questionId                     = $('div.js-content').data('question-id')
+	  , holder                         = $('div.js-content')
+	  , changeStatusForm               = $('#changeStatusForm')
+	  , changeStatusFormErrorMessage   = $('div.js-change-status-form-error-message')
+	  , answerQuestionForm             = $('#answerQuestionForm')
+	  , answerQuestionFormErrorMessage = $('div.js-answer-question-form-error-message')
+	  , authorSecretSendAgainBtn       = $('a.js-author-secret-form-send-again')
+	  , reloadPageOnModalHide          = false
+	  , authorSecretAlreadyAsked       = cookie.parse( window.document.cookie )[ config.webapp.cookieNameSpace ]
 	// fn declarations
 	  , onChangeStatusFormSubmit
 	  , onAnswerQuestionFormSubmit
 	  , onBSModalHidden
 	  , onAuthorSecretSendAgainBtnClick
+	  , onInputsChanged
 	  ;
 
 	onAnswerQuestionFormSubmit = function ( e ) {
@@ -293,6 +294,9 @@ module.exports = function ( app ) {
 				answerQuestionForm.empty().append( config.webapp.messages.thereWasAnErrorPre + error.responseText );
 			} );
 		}
+		if ( !isValid.every( function ( e ) { return e; } ) ) {
+			answerQuestionFormErrorMessage.show();
+		}
 	};
 
 	onChangeStatusFormSubmit = function ( e ) {
@@ -326,6 +330,9 @@ module.exports = function ( app ) {
 				changeStatusForm.empty().append( config.webapp.messages.thereWasAnErrorPre + error.responseText );
 			} );
 		}
+		if ( !( data.authorSecret && data.status ) ) {
+			changeStatusFormErrorMessage.show();
+		}
 	};
 
 	onAuthorSecretSendAgainBtnClick = function () {
@@ -352,9 +359,17 @@ module.exports = function ( app ) {
 		}
 	};
 
+	onInputsChanged = function () {
+
+		changeStatusFormErrorMessage.fadeOut();
+		answerQuestionFormErrorMessage.fadeOut();
+	};
+
 	changeStatusForm.on('submit', onChangeStatusFormSubmit);
 	answerQuestionForm.on('submit', onAnswerQuestionFormSubmit);
 	authorSecretSendAgainBtn.one('click', onAuthorSecretSendAgainBtnClick);
+	changeStatusForm.find('input').on('keyup change', onInputsChanged );
+	answerQuestionForm.find('input,textarea').on('keyup change', onInputsChanged );
 
 	$('#answerQuestionFormContent').on('change keyup', function () {
 		$('span.js-char-count').text( charCount( $(this).val() ) );
