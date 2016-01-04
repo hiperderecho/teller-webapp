@@ -29,7 +29,6 @@ module.exports = function ( app ) {
 			$( createElement(  buildNoResultsMessage() ) ).appendTo( questionsHolder );
 			return;
 		}
-		console.log( 'results', results );
 
 		results.forEach( function ( result ) {
 			var questions

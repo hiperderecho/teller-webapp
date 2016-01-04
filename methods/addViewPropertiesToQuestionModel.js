@@ -4,6 +4,6 @@ var tz      = require( 'moment-timezone' );
 
 module.exports = function ( question ) {
 
-	question.slug = getSlug( question.title );
+	question.slug          = getSlug( question.title );
 	question.formattedDate = moment( question.createdAt ).fromNow();
 };

@@ -3,6 +3,7 @@ var compression = require('compression');
 var minify      = require('express-minify');
 var moment      = require('moment');
 var tz          = require('moment-timezone');
+require('console-stamp')(console);
 
 var app = express();
 

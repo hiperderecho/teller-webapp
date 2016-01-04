@@ -15,6 +15,7 @@
     "babel-polyfill": "^6.2.0",
     "btoa": "^1.1.2",
     "compression": "^1.6.0",
+    "console-stamp": "^0.2.0",
     "cookie": "^0.2.3",
     "express": "^4.13.3",
     "express-minify": "^0.1.6",

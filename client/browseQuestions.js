@@ -30,7 +30,6 @@ module.exports = function ( app ) {
 			$( createElement(  buildNoResultsAndCtaMessage() ) ).appendTo( questionsHolder );
 			return;
 		}
-		console.log( 'results', results );
 
 		results.forEach( function ( result ) {
 			var questions
