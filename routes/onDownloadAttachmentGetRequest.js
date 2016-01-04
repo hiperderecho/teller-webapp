@@ -1,5 +1,5 @@
 var fs   = require('fs');
-var atob = require( 'atob' );
+var atob = require('atob');
 
 module.exports = function ( request, response ) {
 	var givens     = JSON.parse( atob( request.params['givens'] ) );

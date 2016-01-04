@@ -1,8 +1,13 @@
 var express     = require('express');
 var compression = require('compression');
 var minify      = require('express-minify');
+var moment      = require('moment');
+var tz          = require('moment-timezone');
 
 var app = express();
+
+moment.locale('es');
+moment.tz.setDefault('America/Lima');
 
 app.set( 'view engine', 'jade' );
 app.set( 'views', __dirname + '/views/' );

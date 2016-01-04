@@ -1,19 +1,122 @@
 extends ./layout.jade
 
 block content
-	h4 Pregunta
-	div.content-fix-top.js-content(data-api-url="#{apiUrl}",data-question-id="#{id}",data-view="question")
+	div.question-holder.js-content(data-api-url="#{apiUrl}",data-question-id="#{id}",data-public-author-email="#{question.publicAuthorEmail}",data-question-title="#{question.title}",data-question-agency-id="#{question.agencyId}",data-view="question")
 		div.question
-			h4=question.title
-			p=question.publicAuthorEmail
-			p=question.content
-			p=question.status
+			h2=question.title
+			//- p=question.publicAuthorEmail
+			p
+				span.remark.author-full-name #{question.authorFullName} 
+				| le hizo esta pregunta a 
+				span.remark #{question.agencyName} 
+				span.remark(title="#{question.createdAt}") #{question.formattedDate}
+		- if ( question.status === "open" )
+			p Esta pregunta tiene el estado de 
+				span.remark #{question.localizedStatus}
+				| , si no tiene respuesta dentro de 5 días desde su creación será considerada 
+				span.remark Desatendida
+		- if ( question.status === "unanswered" )
+			p Esta pregunta tiene el estado de 
+				span.remark #{question.localizedStatus}
+		- if ( question.status === "successful" )
+			p Esta pregunta fue 
+				span.remark Aceptada 
+				| por su autor
+		- if ( question.status === "unsuccessful" )
+			p.change-status-copy Esta pregunta tiene el estado de 
+				span.remark #{question.localizedStatus}
+				| , si eres el autor puedes 
+			a.change-status.js-change-status(href="#",data-toggle="modal",data-target="#change-status-form-holder") indicar la respuesta como válida
+			br
+		- if ( lastAnswerType === "agency" && question.status !== "successful" )
+			p.keep-answering-copy Esta pregunta ha tenido una respuesta de la Entidad del Estado, si eres el autor puedes 
+			a.keep-answering(href="#",data-toggle="modal",data-target="#answer-question-form-holder") responder
+		- endif
+			div.item-content.question-content=question.content
 		- if ( !!answers.length )
 			div.answers
 				- each answer in answers
 					div.answer
-						p=answer.formattedDate
-						p=answer.content
-						- if ( !!answer.attachment )
-							a(href=answer.attachmentUrl)
-								div(class=answer.attachmentMimeType) Direct Link
+						div.item-content.answer-content(class=answer.type)
+							- if ( answer.type === "agency" )
+								p(title=answer.createdAt)
+									span.remark #{answer.formattedDate} 
+									span.remark #{question.agencyName} 
+									| respondió:
+							- if ( answer.type === "author" )
+								p(title=answer.createdAt)
+									span.remark #{answer.formattedDate} 
+									span.author-full-name.remark #{question.authorFullName} 
+									| respondió:
+							p !{answer.content}
+							- if ( !!answer.attachments )
+								hr
+								div.attachments
+									- each attachment in answer.attachments
+										div.attachment-holder
+											a.attachment(href=attachment.attachmentUrl,class=attachment.mimeType)
+												- if ( attachment.mimeType === "image/png" || attachment.mimeType === "image/jpeg" || attachment.mimeType === "image/gif" || attachment.mimeType === "image/tiff" )
+													i.fa.fa-file-image-o 
+												- else if ( attachment.mimeType === "application/pdf" )
+													i.fa.fa-file-pdf-o 
+												- else if ( attachment.mimeType === "application/msword" )
+													i.fa.fa-file-word-o 
+												- else if ( attachment.mimeType === "application/vnd.ms-excel" )
+													i.fa.fa-file-excel-o 
+												- else if ( attachment.mimeType === "application/vnd.ms-powerpoint" )
+													i.fa.fa-file-powerpoint-o 
+												- else
+													i.fa.fa-file 
+												- endif
+												| #{attachment.originalname}
+												- if ( attachment.size )
+													span.file-size  (#{attachment.humanFileSize})
+			hr
+
+		#change-status-form-holder.modal.fade(tabindex='-1',role='dialog',aria-labelledby='cambiaElEstado')
+			.modal-dialog(role='document')
+				.modal-content
+					.modal-header
+						button.close(type='button',data-dismiss='modal',aria-label='Close')
+							span(aria-hidden='true') ×
+						h4#cambiaElEstado.modal-title Acepta la respuesta
+					.modal-body
+						form#changeStatusForm
+							div.form-group
+								label(for='changeStatusFormSecret') Código de autor&times; 
+									span.form-instruction (te lo enviamos por e-mail)
+								input#changeStatusFormSecret.form-control(type='text',placeholder='Código de autor',name='secret')
+							div.form-group.hidden
+								p
+									label Estatus
+								label(class="radio-inline")
+									input(type="radio",name="status",value="successful",checked)
+									| Exitosa
+								label(class="radio-inline")
+									input(type="radio",name="status",value="unsuccessful")
+									| Fallida
+							.form-group
+								a.js-author-secret-form-send-again(href="#") Soy el autor de esta pregunta y quiero que me envíen de nuevo el código de autor a mi correo
+							button.btn.btn-default(type='submit') Enviar
+
+		#answer-question-form-holder.modal.fade(tabindex='-1',role='dialog',aria-labelledby='responderPregunta')
+			.modal-dialog(role='document')
+				.modal-content
+					.modal-header
+						button.close(type='button',data-dismiss='modal',aria-label='Close')
+							span(aria-hidden='true') ×
+						h4#responderPregunta.modal-title Continua la conversación
+					.modal-body
+						form#answerQuestionForm
+							div.form-group
+								label(for='answerQuestionFormSecret') Código de autor&times; 
+								span.form-instruction (te lo enviamos por e-mail)
+								input#answerQuestionFormSecret.form-control(type='text',placeholder='Código de autor',name='secret')
+							div.form-group
+								label(for='answerQuestionFormContent') Mensaje&times; 
+								span.form-instruction (mínimo 40 carácteres, máximo 800)
+								span.js-char-count.pull-right
+								textarea#answerQuestionFormContent.form-control(rows='3',placeholder='Mensaje',name='content')
+							.form-group
+								a.js-author-secret-form-send-again(href="#") Soy el autor de esta pregunta y quiero que me envíen de nuevo el código de autor a mi correo
+							button.btn.btn-default(type='submit') Enviar

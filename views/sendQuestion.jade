@@ -1,27 +1,44 @@
 extends ./layout.jade
 
+block head
+	script(src="https://www.google.com/recaptcha/api.js")
+
 block content
-	div#cta-form-holder.js-content.content-fix-top(data-api-url="#{apiUrl}",data-view="sendQuestion")
+	div.send-question-holder.js-content(data-api-url="#{apiUrl}",data-view="sendQuestion")
+		h3 Envía una pregunta
+		p Usa el siguiente formulario para enviar tu pregunta a una Entidad del Estado
+		p Por favor 
+			a(href="/buscar-preguntas") verifica que tu pregunta no se hizo antes 
+			| y que todos los datos son correctos
+		hr
 		form#ctaForm
-			.form-group
+			div.form-group
 				label(for='ctaFormAgency') Entidad del Estado&times;
 				select#ctaFormAgency.form-control(name='agencyId')
 					option(value='') Elija una
 					- each agency in agencies
 						option(value=agency.id)=agency.name
-			.form-group
-				label(for='ctaFormAuthorFullName') Nombre completo&times; (mínimo 5 carácteres, máximo 52)
+			div.form-group
+				label(for='ctaFormAuthorFullName') Nombre completo&times; 
+					span.form-instruction (mínimo 5 carácteres, máximo 60)
 				input#ctaFormAuthorFullName.form-control(type='text',placeholder='Nombre completo',name='authorFullName')
-			.form-group
-				label(for='ctaFormAuthor') Email&times; (nunca lo usaremos para publicidad)
+			div.form-group
+				label(for='ctaFormAuthor') Email&times; 
+					span.form-instruction (nunca lo usaremos para publicidad)
 				input#ctaFormAuthor.form-control(type='email',placeholder='Email',name='author')
-			.form-group
-				label(for='ctaFormTitle') Título&times; (mínimo 5 carácteres, máximo 52)
+			div.form-group
+				label(for='ctaFormTitle') Título&times; 
+					span.form-instruction (mínimo 5 carácteres, máximo 60)
 				input#ctaFormTitle.form-control(type='text',placeholder='Título',name='title')
-			.form-group
-				label(for='ctaContent') Mensaje&times; (mínimo 40 carácteres, máximo 400)
-				textarea#ctaFormContent.form-control(rows='3',placeholder='Mensaje',name='content')
-			.form-group
-				p.collapse.js-ctaFormErrorMessage Por favor revisa los campos
-				p.collapse.js-ctaFormSuccessMessage Tu pregunta fue enviada
-			button.btn.btn-default(type='submit') Enviar
+			div.form-group
+				div.g-recaptcha(data-sitekey="6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l")
+			div.form-group
+				label(for='ctaFormContent') Mensaje&times; 
+				span.form-instruction (mínimo 40 carácteres, máximo 800)
+				span.js-char-count.pull-right
+				textarea#ctaFormContent.form-control(rows='10',placeholder='Mensaje',name='content') Buenos días, mi nombre es
+			div.form-group
+				p.collapse.js-cta-form-error-message Por favor revisa los campos
+				p.collapse.js-cta-form-success-message Tu pregunta fue enviada
+			button.btn.btn-info(type='submit') Enviar
+			hr

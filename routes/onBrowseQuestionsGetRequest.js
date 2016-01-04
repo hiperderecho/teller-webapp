@@ -3,14 +3,14 @@ var methods = require( '../methods' );
 
 module.exports = function ( request, response ) {
 
-	methods.getIndexViewResources()
+	methods.getBrowseQuestionsViewResources()
 	.then( function ( result ) {
 		var parsedAgencies;
 
 		parsedAgencies = methods.parseAgenciesForInterpolationFromAgenciesModel( result.agencies );
 		result.questions.forEach( methods.addViewPropertiesToQuestionModel );
 
-		response.render( 'index', { apiUrl: config.webapp.apiUrl, questions: result.questions, questionsCount: result.questionsCount, parsedAgencies: parsedAgencies, agencies: result.agencies } );
+		response.render( 'browseQuestions', { apiUrl: config.webapp.apiUrl, questions: result.questions, parsedAgencies: parsedAgencies, agencies: result.agencies } );
 	} )
 	.catch( function ( error ) {
 

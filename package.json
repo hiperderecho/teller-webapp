@@ -15,10 +15,13 @@
     "babel-polyfill": "^6.2.0",
     "btoa": "^1.1.2",
     "compression": "^1.6.0",
+    "cookie": "^0.2.3",
     "express": "^4.13.3",
     "express-minify": "^0.1.6",
+    "file-size": "^1.0.0",
     "jade": "^1.11.0",
     "moment": "^2.10.6",
+    "moment-timezone": "^0.4.1",
     "request-promise": "^1.0.2",
     "speakingurl": "^7.0.0",
     "virtual-dom": "^2.1.1"

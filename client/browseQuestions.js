@@ -1,8 +1,9 @@
 var createElement = require('virtual-dom/create-element');
 
-var buildQuestion         = require('./utils/buildQuestion');
-var buildNoResultsMessage = require('./utils/buildNoResultsMessage');
-var substringMatcher      = require('./utils/substringMatcher');
+var buildQuestion               = require('./utils/buildQuestion');
+var buildNoResultsAndCtaMessage = require('./utils/buildNoResultsAndCtaMessage');
+var substringMatcher            = require('./utils/substringMatcher');
+var resetNavbarSections         = require('./utils/resetNavbarSections');
 
 module.exports = function ( app ) {
 	var questionsHolder = $('div.js-questions')
@@ -26,7 +27,7 @@ module.exports = function ( app ) {
 
 	buildResults = function ( results ) {
 		if ( !results.length ) {
-			$( createElement(  buildNoResultsMessage() ) ).appendTo( questionsHolder );
+			$( createElement(  buildNoResultsAndCtaMessage() ) ).appendTo( questionsHolder );
 			return;
 		}
 		console.log( 'results', results );
@@ -50,4 +51,8 @@ module.exports = function ( app ) {
 	} );
 
 	populateSearchData();
+	Promise.resolve( resetNavbarSections() )
+	.then( function () {
+		$('li.navbar-browse-questions').addClass('active');
+	} );
 };
