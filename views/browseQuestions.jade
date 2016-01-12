@@ -9,7 +9,7 @@ block content
 				input.form-control.js-question-search(type="text",placeholder="Buscar pregunta")
 		div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 			- each question in questions
-				div.question.js-question(data-id=question.id,data-title=question.title)
+				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])
 					a(href="/preguntas/" + question.id + "/" + question.slug)
 						h4=question.title
 						span=parsedAgencies[question.agencyId]

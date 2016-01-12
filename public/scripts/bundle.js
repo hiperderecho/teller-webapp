@@ -20,8 +20,9 @@ module.exports = function ( app ) {
 
 		questionList.each( function ( i, serverRenderedQuestion ) {
 
-			searchData.push( { id    : $( serverRenderedQuestion ).data('id')
-			                 , title : $( serverRenderedQuestion ).data('title')
+			searchData.push( { id        : $( serverRenderedQuestion ).data('id')
+			                 , title     : $( serverRenderedQuestion ).data('title')
+			                 , agencyName: $( serverRenderedQuestion ).data('agency-name')
 			                 } );
 		} );
 	};
@@ -153,8 +154,9 @@ module.exports = function ( app ) {
 
 		questionList.each( function ( i, serverRenderedQuestion ) {
 
-			searchData.push( { id    : $( serverRenderedQuestion ).data('id')
-			                 , title : $( serverRenderedQuestion ).data('title')
+			searchData.push( { id        : $( serverRenderedQuestion ).data('id')
+			                 , title     : $( serverRenderedQuestion ).data('title')
+			                 , agencyName: $( serverRenderedQuestion ).data('agency-name')
 			                 } );
 		} );
 	};
@@ -462,7 +464,13 @@ module.exports = function resetNavbarSections() {
 };
 },{}],12:[function(require,module,exports){
 module.exports = function substringMatcher( data ) {
-	var strs = _.pluck( data, 'title' );
+	var strs        = _.pluck( data, 'title' );
+	var agencyNames = _.pluck( data, 'agencyName' );
+
+	strs.forEach( function ( str, index, strs ) {
+
+		strs[ index ] = str + ' ' + agencyNames[ index ];
+	} );
 
 	return function findMatches( q, cb ) {
 		var matches

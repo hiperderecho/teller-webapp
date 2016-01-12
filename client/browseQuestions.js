@@ -19,8 +19,9 @@ module.exports = function ( app ) {
 
 		questionList.each( function ( i, serverRenderedQuestion ) {
 
-			searchData.push( { id    : $( serverRenderedQuestion ).data('id')
-			                 , title : $( serverRenderedQuestion ).data('title')
+			searchData.push( { id        : $( serverRenderedQuestion ).data('id')
+			                 , title     : $( serverRenderedQuestion ).data('title')
+			                 , agencyName: $( serverRenderedQuestion ).data('agency-name')
 			                 } );
 		} );
 	};

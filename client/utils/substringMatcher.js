@@ -1,5 +1,11 @@
 module.exports = function substringMatcher( data ) {
-	var strs = _.pluck( data, 'title' );
+	var strs        = _.pluck( data, 'title' );
+	var agencyNames = _.pluck( data, 'agencyName' );
+
+	strs.forEach( function ( str, index, strs ) {
+
+		strs[ index ] = str + ' ' + agencyNames[ index ];
+	} );
 
 	return function findMatches( q, cb ) {
 		var matches
