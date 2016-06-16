@@ -35,7 +35,7 @@ module.exports = function ( app ) {
 		data.authorSecret      = $('#answerQuestionFormSecret').val();
 		data.content           = answerQuestionFormContentText;
 		data.questionId        = questionId;
-		data.publicAuthorEmail = holder.data('public-author-email');
+		// data.publicAuthorEmail = holder.data('public-author-email');
 		data.title             = holder.data('question-title');
 		data.agencyId          = holder.data('question-agency-id');
 
@@ -45,7 +45,7 @@ module.exports = function ( app ) {
 
 		isValid.push( !!data.authorSecret );
 		isValid.push( validators.text.test( answerQuestionFormContentText )
-		              && answerQuestionFormContentText.length < 401
+		              && answerQuestionFormContentText.length < 801
 		              && answerQuestionFormContentText.length > 39 );
 
 		if ( isValid.every( function ( e ) { return e; } ) ) {

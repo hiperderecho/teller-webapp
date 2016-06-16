@@ -1,11 +1,13 @@
 require("babel-polyfill");
-var index           = require('./index');
-var question        = require('./question');
-var ctaForm         = require('./ctaForm');
-var browseQuestions = require('./browseQuestions');
+var views =
+{ index           : require('./index')
+, question        : require('./question')
+, ctaForm         : require('./ctaForm')
+, browseQuestions : require('./browseQuestions')
+};
 
 var init = function () {
-	var view = $('div.js-content').data('view')
+	var view = $('div.js-app-holder').data('view')
 	  , app  = {}
 	  ;
 
@@ -18,18 +20,10 @@ var init = function () {
 	app.apiAnswersUrl   = app.apiBaseUrl + 'api/answers/';
 	app.localStorageNS  = 'pidelainfo';
 
-	if ( view === 'index' ) {
-		index( app );
-	}
-	if ( view === 'question' ) {
-		question( app );
-	}
 	if ( view === 'sendQuestion' ) {
-		ctaForm( app );
+		view = 'ctaForm';
 	}
-	if ( view === 'browseQuestions' ) {
-		browseQuestions( app );
-	}
+	views[ view ]();
 
 	// Global icons
 	$('span.remark:contains("Abierta")')        .addClass('pi-icon pi-icon-open');

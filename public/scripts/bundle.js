@@ -87,6 +87,10 @@ module.exports = function ( app ) {
 		isValid.push( validators.fullname.test( ctaForm.find('#ctaFormAuthorFullName').val() )
 		              && ctaForm.find('#ctaFormAuthorFullName').val().length < 61
 		              && ctaForm.find('#ctaFormAuthorFullName').val().length > 4 );
+		isValid.push( validators.dni.test( ctaForm.find('#ctaFormDni').val() )
+		              && ctaForm.find('#ctaFormDni').val().length === 8 );
+		isValid.push( validators.address.test( ctaForm.find('#ctaFormAddress').val() )
+		              && ctaForm.find('#ctaFormAddress').val().length < 100 );
 		isValid.push( validators.email.test( ctaForm.find('#ctaFormAuthor').val() ) );
 		isValid.push( validators.text.test( ctaForm.find('#ctaFormTitle').val() )
 		              && ctaForm.find('#ctaFormTitle').val().length < 61
@@ -189,13 +193,15 @@ module.exports = function ( app ) {
 };
 },{"./utils/buildNoResultsMessage":7,"./utils/buildQuestion":9,"./utils/substringMatcher":12,"virtual-dom/create-element":206}],4:[function(require,module,exports){
 require("babel-polyfill");
-var index           = require('./index');
-var question        = require('./question');
-var ctaForm         = require('./ctaForm');
-var browseQuestions = require('./browseQuestions');
+var views =
+{ index           : require('./index')
+, question        : require('./question')
+, ctaForm         : require('./ctaForm')
+, browseQuestions : require('./browseQuestions')
+};
 
 var init = function () {
-	var view = $('div.js-content').data('view')
+	var view = $('div.js-app-holder').data('view')
 	  , app  = {}
 	  ;
 
@@ -208,18 +214,10 @@ var init = function () {
 	app.apiAnswersUrl   = app.apiBaseUrl + 'api/answers/';
 	app.localStorageNS  = 'pidelainfo';
 
-	if ( view === 'index' ) {
-		index( app );
-	}
-	if ( view === 'question' ) {
-		question( app );
-	}
 	if ( view === 'sendQuestion' ) {
-		ctaForm( app );
+		view = 'ctaForm';
 	}
-	if ( view === 'browseQuestions' ) {
-		browseQuestions( app );
-	}
+	views[ view ]();
 
 	// Global icons
 	$('span.remark:contains("Abierta")')        .addClass('pi-icon pi-icon-open');
@@ -267,7 +265,7 @@ module.exports = function ( app ) {
 		data.authorSecret      = $('#answerQuestionFormSecret').val();
 		data.content           = answerQuestionFormContentText;
 		data.questionId        = questionId;
-		data.publicAuthorEmail = holder.data('public-author-email');
+		// data.publicAuthorEmail = holder.data('public-author-email');
 		data.title             = holder.data('question-title');
 		data.agencyId          = holder.data('question-agency-id');
 
@@ -277,7 +275,7 @@ module.exports = function ( app ) {
 
 		isValid.push( !!data.authorSecret );
 		isValid.push( validators.text.test( answerQuestionFormContentText )
-		              && answerQuestionFormContentText.length < 401
+		              && answerQuestionFormContentText.length < 801
 		              && answerQuestionFormContentText.length > 39 );
 
 		if ( isValid.every( function ( e ) { return e; } ) ) {
@@ -515,6 +513,8 @@ validators.text        = /[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+/;
 validators.fullname    = /^[a-záéíóúÁÉÍÓÚñÑA-Z]([-']?[a-záéíóúÁÉÍÓÚñÑA-Z]+)*( [a-záéíóúÁÉÍÓÚñÑA-Z]([-']?[a-záéíóúÁÉÍÓÚñÑA-Z]+)*)+$/;
 validators.email       = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 validators.phonenumber = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{2,3}$/;
+validators.dni         = /[0-9]{8}/;
+validators.address     = /[a-zA-ZáéíóúÁÉÍÓÚñÑ 0-9]+/
 
 module.exports = validators;
 },{}],14:[function(require,module,exports){

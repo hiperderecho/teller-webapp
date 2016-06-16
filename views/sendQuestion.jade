@@ -23,6 +23,14 @@ block content
 					span.form-instruction (mínimo 5 carácteres, máximo 60)
 				input#ctaFormAuthorFullName.form-control(type='text',placeholder='Nombre completo',name='authorFullName')
 			div.form-group
+				label(for='ctaFormDni') DNI&times; 
+					span.form-instruction 
+				input#ctaFormDni.form-control(type='number',placeholder='DNI',name='dni',min='10000000',max='99999999')
+			div.form-group
+				label(for='ctaFormAddress') Dirección&times; 
+					span.form-instruction 
+				input#ctaFormAddress.form-control(type='text',placeholder='Dirección',name='address')
+			div.form-group
 				label(for='ctaFormAuthor') Email&times; 
 					span.form-instruction (nunca lo usaremos para publicidad)
 				input#ctaFormAuthor.form-control(type='email',placeholder='Email',name='author')
@@ -31,12 +39,12 @@ block content
 					span.form-instruction (mínimo 5 carácteres, máximo 60)
 				input#ctaFormTitle.form-control(type='text',placeholder='Título',name='title')
 			div.form-group
-				div.g-recaptcha(data-sitekey="6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l")
-			div.form-group
 				label(for='ctaFormContent') Mensaje&times; 
 				span.form-instruction (mínimo 40 carácteres, máximo 800)
 				span.js-char-count.pull-right
 				textarea#ctaFormContent.form-control(rows='10',placeholder='Mensaje',name='content') Buenos días, mi nombre es
+			div.form-group
+				div.g-recaptcha(data-sitekey="6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l")
 			div.form-group
 				p.collapse.js-cta-form-error-message Por favor revisa los campos
 				p.collapse.js-cta-form-success-message Tu pregunta fue enviada

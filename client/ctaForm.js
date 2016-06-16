@@ -27,6 +27,10 @@ module.exports = function ( app ) {
 		isValid.push( validators.fullname.test( ctaForm.find('#ctaFormAuthorFullName').val() )
 		              && ctaForm.find('#ctaFormAuthorFullName').val().length < 61
 		              && ctaForm.find('#ctaFormAuthorFullName').val().length > 4 );
+		isValid.push( validators.dni.test( ctaForm.find('#ctaFormDni').val() )
+		              && ctaForm.find('#ctaFormDni').val().length === 8 );
+		isValid.push( validators.address.test( ctaForm.find('#ctaFormAddress').val() )
+		              && ctaForm.find('#ctaFormAddress').val().length < 100 );
 		isValid.push( validators.email.test( ctaForm.find('#ctaFormAuthor').val() ) );
 		isValid.push( validators.text.test( ctaForm.find('#ctaFormTitle').val() )
 		              && ctaForm.find('#ctaFormTitle').val().length < 61
