@@ -1,12 +1,15 @@
 extends ./layout.jade
 
+block head
+	title Pidela.info — Solicitudes enviadas
+
 block content
 	div.browse-questions-holder.js-content(data-api-url="#{apiUrl}",data-view="browseQuestions")
-		h2 Buscar preguntas
-		p De repente tu duda ya fue resulta, busca en todas nuestras preguntas
+		h2 Solicitudes enviadas
+		p Aquí puedes consultar todas las solicitudes que han enviado otros usuarios.
 		div.search-holder.js-search-holder
 			div.form-group
-				input.form-control.js-question-search(type="text",placeholder="Buscar pregunta")
+				input.form-control.js-question-search(type="text",placeholder="Busca por entidad, tema o palabra clave.")
 		div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 			- each question in questions
 				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])

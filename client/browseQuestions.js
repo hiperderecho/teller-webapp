@@ -53,6 +53,7 @@ module.exports = function ( app ) {
 	populateSearchData();
 	Promise.resolve( resetNavbarSections() )
 	.then( function () {
+
 		$('li.navbar-browse-questions').addClass('active');
 	} );
 };

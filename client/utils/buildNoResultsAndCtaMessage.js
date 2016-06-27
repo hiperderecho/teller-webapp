@@ -5,7 +5,7 @@ module.exports = function () {
 
 	domChunk = h('div', { attributes: { 'class': 'no-results-search' } }
 	            , [ h('h4', [ 'No encontramos una pregunta parecida' ] )
-	              , h('a', { attributes: { 'href': '/enviar-pregunta' } }, [ 'Puedes enviar una' ] )
+	              , h('a', { attributes: { 'href': '/nueva-solicitud' } }, [ 'Puedes enviar una' ] )
 	              ]
 	            );
 

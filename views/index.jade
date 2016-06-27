@@ -1,55 +1,59 @@
 extends ./layout.jade
 
+block head
+	title Pidela.info — Haciendo público tu derecho a la información pública
+
 block content
 	div.index-holder.js-content(data-api-url="#{apiUrl}",data-view="index")
 		div.jumbotron.part.part-1.intro
-			h2 Obtén respuestas del gobierno
+			h2 Haciendo público tu derecho
 				br
-				| y del sector público
+				| a la información pública
 			h4.one-line-intro Haz una 
-				a(href="//es.wikipedia.org/wiki/Libertad_de_informaci%C3%B3n") Solicitud de Información (SDI) 
-				| a una Entidad del Estado
-			p#como-funciona o 
-				a(href="/buscar-preguntas") busca en las #{questionsCount} preguntas hechas 
-				| a #{agencies.length} Entidades del Estado
+				a(href="/nueva-solicitud") Solicitud de Acceso a la Información pública 
+				| a una entidad del Estado peruano
+			h4 o busca en 
+				a(href="/solicitudes-enviadas") las #{questionsCount} solicitudes 
+				//- | hechas a #{agencies.length} Entidades del Estado
+				| realizadas por otros usuarios.
 		div.hidden-xs.hidden-sm.hidden-md.cta-holder
-			h4 ¿Quiéres hacer una pregunta?
-			p Pídeles la info
-			a.btn.btn-success(href="/enviar-pregunta") Envía una pregunta
+			h4 ¿Quieres pedir información pública?
+			//- p Pídeles la info
+			a.btn.btn-success(href="/nueva-solicitud") Envía una solicitud
 		div.part.part-2.how-it-works
 			h3 ¿Cómo funciona?
-			p Queremos darte la oportunidad de hacer preguntas a las Entidades del estado
-			p Pidela.info te ayuda a realizar Solicitudes de Información y las publica online.
+			//- p Queremos darte la oportunidad de hacer preguntas a las Entidades del estado
+			p Pidela.info es una plataforma web que te permite hacer solicitudes de acceso a la información pública a través de Internet.
 			div.steps
 				div.step.step-1
-					p Utiliza este sitio para hacer Solicitudes de Información – te mostraremos como hacerlo
+					p Elige la entidad del Estado a la que quieres pedirle información y detalla tu solicitud a través de nuestro formulario.
 					p.step-number 1
 				div.step.step-2
-					p Te enviaremos un e-mail al momento que tu Solicitud reciba una respuesta
+					p Le enviaremos un correo electrónico a la Entidad detallándole tu pedido.
 					p.step-number 2
 				div.step.step-3
-					p Publicaremos la respuesta en línea así todos podrán favorecerse de este acceso de información
+					p Cuando recibamos una respuesta, te avisaremos por correo electrónico y publicaremos la respuesta aquí.
 					p.step-number 3
 				div.hidden-xs.hidden-sm.steps-line
 			div.learn-more
-				a.btn.btn-info(href="//google.com") Conoce más sobre el proyecto 
+				a.btn.btn-info(href="//google.com") Conoce más sobre cómo funciona esta web 
 					i.fa.fa-arrow-right
 		hr
 		div.part.part-3.more-info-holder
 			div.row
 				div.col-md-6
-					h4 ¿A quiénes les puedo hacer preguntas?
-					p Estas son las Entidades del Estado con las que estamos trabajando
+					h4 ¿A quiénes puedo enviar solicitudes?
+					p Estas son las entidades del Estado con las que trabajamos
 					ul.agencies(data-agencies=agencies)
 						- each agency in agencies
 							li
 								h4=agency.name
 				hr.hidden-sm.hidden-md.hidden-lg
 				div.col-md-6
-					h4 ¿Cuáles son las últimas preguntas que se han hecho?
+					h4 Últimas solicitudes enviadas
 					div.search-holder.js-search-holder
 						div.form-group
-							input.form-control.js-question-search(type="text",placeholder="Buscar pregunta")
+							input.form-control.js-question-search(type="text",placeholder="Busca en últimas solicitudes")
 					div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 						- each question in questions
 							div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])

@@ -1,52 +1,78 @@
 extends ./layout.jade
 
 block head
-	script(src="https://www.google.com/recaptcha/api.js")
+	title Pidela.info — Enviar Solicitud de Acceso a la Información Pública
+	script(src='https://www.google.com/recaptcha/api.js')
 
 block content
-	div.send-question-holder.js-content(data-api-url="#{apiUrl}",data-view="sendQuestion")
-		h3 Envía una pregunta
-		p Usa el siguiente formulario para enviar tu pregunta a una Entidad del Estado
-		p Por favor 
-			a(href="/buscar-preguntas") verifica que tu pregunta no se hizo antes 
-			| y que todos los datos son correctos
+	div.send-question-holder.js-content(data-api-url='#{apiUrl}',data-view='sendQuestion')
+		h3 Envía una Solicitud de Acceso a la Información Pública
+		p Usa este formulario para enviar una nueva Solicitud de Acceso a la Información Pública
+		p Recuerda 
+			a(href='/solicitudes-enviadas') verificar que la información que solicitas no se encuentra en nuestra base de datos 
+			| o en la página web de la entidad. Todos los campos son obligatorios.
 		hr
-		form#ctaForm
-			div.form-group
-				label(for='ctaFormAgency') Entidad del Estado&times;
-				select#ctaFormAgency.form-control(name='agencyId')
-					option(value='') Elija una
-					- each agency in agencies
-						option(value=agency.id)=agency.name
-			div.form-group
-				label(for='ctaFormAuthorFullName') Nombre completo&times; 
-					span.form-instruction (mínimo 5 carácteres, máximo 60)
-				input#ctaFormAuthorFullName.form-control(type='text',placeholder='Nombre completo',name='authorFullName')
-			div.form-group
-				label(for='ctaFormDni') DNI&times; 
-					span.form-instruction 
-				input#ctaFormDni.form-control(type='number',placeholder='DNI',name='dni',min='10000000',max='99999999')
-			div.form-group
-				label(for='ctaFormAddress') Dirección&times; 
-					span.form-instruction 
-				input#ctaFormAddress.form-control(type='text',placeholder='Dirección',name='address')
-			div.form-group
-				label(for='ctaFormAuthor') Email&times; 
-					span.form-instruction (nunca lo usaremos para publicidad)
-				input#ctaFormAuthor.form-control(type='email',placeholder='Email',name='author')
-			div.form-group
-				label(for='ctaFormTitle') Título&times; 
-					span.form-instruction (mínimo 5 carácteres, máximo 60)
-				input#ctaFormTitle.form-control(type='text',placeholder='Título',name='title')
-			div.form-group
-				label(for='ctaFormContent') Mensaje&times; 
-				span.form-instruction (mínimo 40 carácteres, máximo 800)
-				span.js-char-count.pull-right
-				textarea#ctaFormContent.form-control(rows='10',placeholder='Mensaje',name='content') Buenos días, mi nombre es
-			div.form-group
-				div.g-recaptcha(data-sitekey="6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l")
-			div.form-group
-				p.collapse.js-cta-form-error-message Por favor revisa los campos
-				p.collapse.js-cta-form-success-message Tu pregunta fue enviada
-			button.btn.btn-info(type='submit') Enviar
-			hr
+		div.row
+			div.col-md-6.cta-form-holder
+				form#ctaForm
+					div.form-group
+						label(for='ctaFormAgency') Entidad 
+						select#ctaFormAgency.form-control(name='agencyId')
+							option(value='') Elige una entidad de la lista.
+							- each agency in agencies
+								option(value=agency.id)=agency.name
+					div.form-group
+						label(for='ctaFormAuthorFullName') Nombre completo 
+							span.form-instruction (mínimo 5 carácteres, máximo 60)
+						input#ctaFormAuthorFullName.form-control(type='text',placeholder='Recuerda usar tu nombre verdadero.',name='authorFullName')
+					div.form-group
+						label(for='ctaFormDni') DNI 
+							span.form-instruction 
+						input#ctaFormDni.form-control(type='number',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='dni',min='10000000',max='99999999')
+					div.form-group
+						label(for='ctaFormAddress') Domicilio 
+							span.form-instruction 
+						input#ctaFormAddress.form-control(type='text',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='address')
+					div.form-group
+						label(for='ctaFormAuthor') Correo electrónico 
+							span.form-instruction (nunca lo usaremos para publicidad)
+						input#ctaFormAuthor.form-control(type='email',placeholder='Por este medio te contactaremos cuando tu Solicitud sea contestada.',name='author')
+					div.form-group
+						label(for='ctaFormTitle') Sumilla 
+							span.form-instruction (mínimo 5 carácteres, máximo 60)
+						input#ctaFormTitle.form-control(type='text',placeholder='Describe el tema de tu pedido en pocas palabras.',name='title')
+					div.form-group
+						label(for='ctaFormContent') ¿Qué información quieres solicitar? 
+						span.form-instruction (mínimo 40 carácteres, máximo 800)
+						p Señor Funcionario Responsable de Acceso a la Información Pública
+						p De mi consideración:
+						p Me dirijo a usted en ejercicio de mi derecho de solicitar acceso a la información pública, en los términos en los que está regulado en la Ley de Transparencia y Acceso a la Información Pública y su Reglamento. Conforme al artículo 10 del Reglamento de la referida Ley, este pedido puede realizarse a través de una dirección electrónica dado que toda la información necesaria se acompaña a este mensaje.
+						p Solicito a usted que me proporcione copias electrónicas simples de los siguientes documentos:
+						span.js-char-count.pull-right
+						textarea#ctaFormContent.form-control(rows='10',placeholder='Lista la información que quieres solicitar.',name='content')
+						p Además, preciso que la información solicitada debe de enviarse en formato electrónico mediante mensaje de correo electróncio dirigido a la dirección de origen de este mensaje. Por lo señalado, de acuerdo con el artículo 12 del Reglamento, la respuesta a este pedido no tiene ningún costo.
+					div.form-group
+						label Haz clic en la casilla de verificación 
+						div.g-recaptcha(data-sitekey='6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l')
+					div.form-group
+						p.collapse.js-cta-form-error-message No hemos podido enviar tu Solicitud. Asegúrate que todos los campos están llenos.
+						p.collapse.js-cta-form-success-message Tu solicitud fue enviada
+					button.btn.btn-info(type='submit') Enviar
+			div.col-md-6.info-holder
+				div.visible-lg-block.extra-info-holder.js-extra-info-holder
+					:markdown-it
+						Recuerda que tu nombre completo, el contenido de tu solicitud y su respuesta quedarán publicados en esta página.
+
+						Escribe tu solicitud usando un lenguaje sencillo y comprensible. Puedes [mirar otras solicitudes realizadas](/solicitudes-enviadas) para hacerte una mejor idea de cómo escribirla.
+
+
+						#### ¿Qué información puedo solicitar?
+
+						Una **Solicitud de Acceso a la Información Pública** sirve para pedirle a una entidad del Estado copia de cualquier documento, fotografía, base de datos, grabación o archivo creado, obtenido o actualmente en su poder.
+
+						#### ¿Qué información no puedo solicitar?
+
+						No puedes pedir nada que la entidad ningún documento o información que la entidad no tenga o no haya producido hasta ahora. Tampoco puedes pedir información clasificada como secreta, reservada o confidencial. Puedes conocer más sobre estas excepciones en nuestra [Guía para el Solicitante](/como-funciona). Obviamente, no puedes pedir a través de sta plataforma nada que la Entidad no puede enviarte por correo electrónico.
+
+						Asegúrate que la información que solicitas no esté disponible ya en la página web de la Entidad.
+		hr

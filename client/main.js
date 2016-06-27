@@ -4,6 +4,8 @@ var views =
 , question        : require('./question')
 , ctaForm         : require('./ctaForm')
 , browseQuestions : require('./browseQuestions')
+, credits         : require('./credits')
+, howItWorks      : require('./howItWorks')
 };
 
 var init = function () {
@@ -23,7 +25,7 @@ var init = function () {
 	if ( view === 'sendQuestion' ) {
 		view = 'ctaForm';
 	}
-	views[ view ]();
+	views[ view ]( app );
 
 	// Global icons
 	$('span.remark:contains("Abierta")')        .addClass('pi-icon pi-icon-open');

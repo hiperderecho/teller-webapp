@@ -10,11 +10,13 @@ module.exports = function ( app ) {
 	  , ctaForm                = $('#ctaForm')
 	  , ctaFormErrorMessage    = $('p.js-cta-form-error-message')
 	  , ctaFormSuccessMessage  = $('p.js-cta-form-success-message')
+	  , ctaFormExtraInfoHolder = $('div.js-extra-info-holder')
 	  , ctaFormCharCountHolder = $('span.js-char-count')
 	// fn declarations
 	  , onCtaFormSubmit
 	  , onTextareaChanged
 	  , onInputsChanged
+	  , onWindowScroll
 	  ;
 
 	onCtaFormSubmit = function ( e ) {
@@ -43,6 +45,7 @@ module.exports = function ( app ) {
 
 		if ( isValid.every( function ( e ) { return e; } ) ) {
 
+			ctaFormExtraInfoHolder.hide();
 			ctaFormSuccessMessage.show();
 			$.post( app.apiQuestionsUrl, $this.serialize() )
 			.then( function ( result ) {
@@ -69,11 +72,33 @@ module.exports = function ( app ) {
 		ctaFormCharCountHolder.text( charCount( $this.val() ) );
 	};
 
+	onWindowScroll = function () {
+		var $window    = $(window)
+		  , topMark    = 220
+		  , bottomMark = 1040
+		  ;
+
+		if ( $window.scrollTop() > topMark && $window.scrollTop() < bottomMark ) {
+			ctaFormExtraInfoHolder.addClass('extra-info-affix');
+		} else {
+			ctaFormExtraInfoHolder.removeClass('extra-info-affix');
+		}
+		if ( $window.scrollTop() >= bottomMark ) {
+			ctaFormExtraInfoHolder.addClass('extra-info-affix-bottom');
+		} else {
+			ctaFormExtraInfoHolder.removeClass('extra-info-affix-bottom');
+		}
+	};
+
 	ctaForm.find('input,textarea,select').on('keyup change', onInputsChanged );
 	ctaForm.on('submit', onCtaFormSubmit );
 	ctaForm.find('textarea').on('keyup change', onTextareaChanged );
+	$('[data-toggle="tooltip"]').tooltip( { trigger: 'focus', html: true } );
 	Promise.resolve( resetNavbarSections() )
 	.then( function () {
 		$('li.navbar-send-question').addClass('active');
 	} );
+	// We will use our own affix solution since bootstrap's seems to be broken :(
+	$(window).on('scroll', onWindowScroll ).scrollTop(0);
+
 };

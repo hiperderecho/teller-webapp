@@ -32,12 +32,12 @@ block content
 			p.keep-answering-copy Esta pregunta ha tenido una respuesta de la Entidad del Estado, si eres el autor puedes 
 			a.keep-answering(href="#",data-toggle="modal",data-target="#answer-question-form-holder") responder
 		- endif
-			div.item-content.question-content=question.content
+			div.item-content.question-content.dont-break-out=question.content
 		- if ( !!answers.length )
 			div.answers
 				- each answer in answers
 					div.answer
-						div.item-content.answer-content(class=answer.type)
+						div.item-content.answer-content.dont-break-out(class=answer.type)
 							- if ( answer.type === "agency" )
 								p(title=answer.createdAt)
 									span.remark #{answer.formattedDate} 

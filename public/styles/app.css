@@ -1,5 +1,40 @@
 body {
-	padding-top: 70px;
+	padding-top: 250px;
+}
+
+/* Nav brand */
+
+.pidelainfo .pidelainfo-brand-holder {
+	background-color: #2f2f81;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+.pidelainfo .pidelainfo-brand {
+	background: url(../images/pidelainfo-logo.png) no-repeat;
+	display: block;
+	height: 102px;
+	font-size: 0px;
+	margin: 20px 0;
+	width: 315px;
+}
+.pidelainfo .pidelainfo-brand-fix {
+	position: relative;
+}
+.pidelainfo .pidelainfo-navigation-holder {
+	background: #ef4a24;
+	position: relative;
+	top: 142px;
+	width: 100%;
+}
+.pidelainfo.navbar-default .navbar-nav>.active>a,
+.pidelainfo.navbar-default .navbar-nav>.active>a:hover,
+.pidelainfo.navbar-default .navbar-nav>.active>a:focus {
+	background-color: #98250b;
+}
+.pidelainfo.navbar-default .navbar-nav>li>a:hover,
+.pidelainfo.navbar-default .navbar-nav>li>a:focus {
+	color: #2f2f81;
 }
 
 /* Index */
@@ -40,7 +75,7 @@ body {
 	height: 190px;
 	line-height: 24px;
 	margin: 0 10px;
-	padding: 30px 30px;
+	padding: 20px 29px;
 	position: relative;
 	vertical-align: top;
 	width: 240px;
@@ -84,11 +119,11 @@ body {
 	}
 	.index-holder .part-2 .steps .step {
 		display: block;
-		font-size: 14px;
+		font-size: 13px;
 		height: 80px;
 		left: 40px;
 		line-height: inherit;
-		padding: 10px 20px;
+		padding: 7px 25px;
 		position: relative;
 		margin: 10px 0;
 		width: 90%;
@@ -103,9 +138,12 @@ body {
 		left: -40px;
 	}
 	.index-holder .part-2 .learn-more {
-		left: 10px;
+		left: 11px;
 		position: relative;
 		top: 7px;
+	}
+	.index-holder .part-2 .learn-more a {
+		font-size: 13px;
 	}
 }
 @media(min-width:768px) and (max-width: 991px) {
@@ -117,7 +155,7 @@ body {
 		height: 70px;
 		left: 90px;
 		line-height: inherit;
-		padding: 20px;
+		padding: 13px;
 		position: relative;
 		margin: 10px 0;
 		width: 80%;
@@ -158,15 +196,78 @@ body {
 	content: " para ";
 }
 
+.pidelainfo .index-holder .jumbotron {
+	background-color: #ddddf2;
+}
+.pidelainfo .index-holder .jumbotron h2,
+.pidelainfo .index-holder .jumbotron a {
+	color: #2f2f81;
+}
+.pidelainfo .index-holder .cta-holder {
+	background: #2f2f81;
+}
+.pidelainfo .index-holder .btn-success {
+	border-color: #ef4a24;
+	background: #ef4a24;
+	color: white;
+	font-size: 22px;
+}
+.pidelainfo .index-holder .btn-success:hover {
+	border-color: #98250b;
+	background: #98250b;
+}
+.pidelainfo .index-holder .part-2 .steps .step {
+	background: #2f2f81;
+}
+.pidelainfo .index-holder .part-2 .steps .step:after {
+	border-top: 20px solid #2f2f81;
+}
+.pidelainfo .index-holder .btn-info {
+	border-color: #2f2f81;
+	background: #2f2f81;
+	color: white;
+}
+.pidelainfo .index-holder .btn-info:hover {
+	background: #0e0e29;
+}
+.pidelainfo a {
+	color: #2f2f81;
+	font-weight: bold;
+}
+
 /* Send question */
 
 .send-question-holder {
 	min-height: 500px;
 }
+.send-question-holder .cta-form-holder {
+	border-right: 1px solid #ccc;
+}
 .send-question-holder .form-instruction {
 	font-size: 11px;
 }
-
+.send-question-holder .info-holder {
+	padding: 20px;
+	position: relative;
+}
+.send-question-holder .extra-info-affix {
+	position: fixed;
+	width: 545px;
+	top: 220px;
+}
+.send-question-holder .extra-info-affix-bottom {
+	position: relative;
+	width: 100%;
+	top: 838px;
+}
+.pidelainfo .send-question-holder .btn-info {
+	border-color: #2f2f81;
+	background: #2f2f81;
+	color: white;
+}
+.pidelainfo .send-question-holder .btn-info:hover {
+	background: #0e0e29;
+}
 /* Question */
 
 .question-holder {
@@ -218,6 +319,19 @@ body {
 	font-size: 11px;
 }
 
+.pidelainfo .question-holder .question-content{
+	border-top: solid 5px #2f2f81;
+	border-bottom: solid 5px #2f2f81;
+}
+.pidelainfo .answer-content.agency {
+	border-top: solid 5px #ef4a24;
+	border-bottom: solid 5px #ef4a24;
+}
+.pidelainfo .answer-content.author {
+	border-top: solid 5px #2f2f81;
+	border-bottom: solid 5px #2f2f81;
+}
+
 /* Browse questions */
 
 .browse-questions-holder {
@@ -243,12 +357,33 @@ body {
 	content: " para ";
 }
 
+/* Credits */
+.credits-holder {
+	margin: 0 0 40%;
+}
+
 /* Footer */
 
 .footer-holder {
 	background: #2c3e50;
 	color: white;
 	padding: 50px 0;
+}
+.footer-credits-holder {
+	background: #2c3e50;
+	padding: 20px 0;
+}
+
+.pidelainfo.footer-holder {
+	background: #2f2f81;
+	color: white;
+}
+.pidelainfo.footer-credits-holder {
+	background: #0e0e29;
+	color: white;
+}
+.pidelainfo.footer-credits-holder a {
+	color: white;
 }
 
 /* 404 */
@@ -275,6 +410,18 @@ body {
 .pi-icon-unanswered:before {
 	content: "\f023";
 }
+.dont-break-out {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+
+	-ms-word-break: break-all;
+	word-break: break-word;
+
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens; auto;
+	hyphens: auto;
+}
 
 /* Third party */
 .gmail_extra {
@@ -282,4 +429,10 @@ body {
 }
 .gmail_quote {
 	display: none;
+}
+.tooltip {
+	width: 400px;
+}
+.tooltip-inner {
+	max-width: none;
 }
