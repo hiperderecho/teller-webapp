@@ -45,7 +45,8 @@ module.exports = function ( app ) {
 
 		if ( isValid.every( function ( e ) { return e; } ) ) {
 
-			ctaFormExtraInfoHolder.hide();
+			ctaFormExtraInfoHolder.parent().hide();
+			$( window ).scrollTop( 0 );
 			ctaFormSuccessMessage.show();
 			$.post( app.apiQuestionsUrl, $this.serialize() )
 			.then( function ( result ) {
@@ -99,6 +100,5 @@ module.exports = function ( app ) {
 		$('li.navbar-send-question').addClass('active');
 	} );
 	// We will use our own affix solution since bootstrap's seems to be broken :(
-	$(window).on('scroll', onWindowScroll ).scrollTop(0);
-
+	$( window ).on('scroll', onWindowScroll ).scrollTop( 0 );
 };

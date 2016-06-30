@@ -33,5 +33,9 @@
     "markdown-js": "0.0.3",
     "nodemon": "^1.8.1",
     "watchify": "^3.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hiperderecho/teller-webapp.git"
   }
 }

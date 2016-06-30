@@ -13,7 +13,7 @@ block content
 		- if ( question.status === "open" )
 			p Esta pregunta tiene el estado de 
 				span.remark #{question.localizedStatus}
-				| , si no tiene respuesta dentro de 5 días desde su creación será considerada 
+				| , si no tiene respuesta dentro de 10 días desde su creación será considerada 
 				span.remark Desatendida
 		- if ( question.status === "unanswered" )
 			p Esta pregunta tiene el estado de 
@@ -32,7 +32,19 @@ block content
 			p.keep-answering-copy Esta pregunta ha tenido una respuesta de la Entidad del Estado, si eres el autor puedes 
 			a.keep-answering(href="#",data-toggle="modal",data-target="#answer-question-form-holder") responder
 		- endif
-			div.item-content.question-content.dont-break-out=question.content
+			div.item-content.question-content.dont-break-out Señor Funcionario Responsable de Acceso a la Información Pública 
+				| 
+				| De mi consideración: 
+				| 
+				| Me dirijo a usted en ejercicio de mi derecho de solicitar acceso a la información pública, en los términos en los que está regulado en la Ley de Transparencia y Acceso a la Información Pública y su Reglamento. Conforme al artículo 10 del Reglamento de la referida Ley, este pedido puede realizarse a través de una dirección electrónica dado que toda la información necesaria se acompaña a este mensaje. 
+				| 
+				| Solicito a usted que me proporcione copias electrónicas simples de los siguientes documentos: 
+				| 
+				| #{question.content}
+				| 
+				| Además, preciso que la información solicitada debe de enviarse en formato electrónico mediante mensaje de correo electróncio dirigido a la dirección de origen de este mensaje. Por lo señalado, de acuerdo con el artículo 12 del Reglamento, la respuesta a este pedido no tiene ningún costo. 
+				| 
+				| De no ser posible enviar esta información o de no poder hacerlo en el formato señalado, le pido que por favor se comunique conmigo a este mismo correo. Este mensaje y su respuesta quedarán registrados en una plataforma accesible al público en Pidela.info.
 		- if ( !!answers.length )
 			div.answers
 				- each answer in answers

@@ -113,7 +113,8 @@ module.exports = function ( app ) {
 
 		if ( isValid.every( function ( e ) { return e; } ) ) {
 
-			ctaFormExtraInfoHolder.hide();
+			ctaFormExtraInfoHolder.parent().hide();
+			$( window ).scrollTop( 0 );
 			ctaFormSuccessMessage.show();
 			$.post( app.apiQuestionsUrl, $this.serialize() )
 			.then( function ( result ) {
@@ -166,8 +167,8 @@ module.exports = function ( app ) {
 	.then( function () {
 		$('li.navbar-send-question').addClass('active');
 	} );
-	$(window).on('scroll', onWindowScroll ).scrollTop(0);
-
+	// We will use our own affix solution since bootstrap's seems to be broken :(
+	$( window ).on('scroll', onWindowScroll ).scrollTop( 0 );
 };
 },{"./utils/buildOnQuestionSentMessage":10,"./utils/charCount":12,"./utils/resetNavbarSections":13,"./utils/validators":15,"virtual-dom/create-element":208}],4:[function(require,module,exports){
 var resetNavbarSections = require('./utils/resetNavbarSections');
