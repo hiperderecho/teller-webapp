@@ -1,22 +1,33 @@
 body {
-	padding-top: 250px;
+	padding-top: 0;
 }
 
 /* Nav brand */
 
 .pidelainfo .pidelainfo-brand-holder {
 	background-color: #2f2f81;
-	position: fixed;
+	position: relative;
 	top: 0;
 	width: 100%;
 }
 .pidelainfo .pidelainfo-brand {
 	background: url(../images/pidelainfo-logo.png) no-repeat;
 	display: block;
-	height: 102px;
-	font-size: 0px;
+	height: 80px;
+	font-size: 0;
 	margin: 20px 0;
-	width: 315px;
+	width: 247px;
+}
+@media(max-width:767px) {
+	.pidelainfo .pidelainfo-brand {
+		margin: 20px auto;
+	}
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	.pidelainfo .pidelainfo-brand {
+		background: url(../images/pidelainfo-logo@2x.png) no-repeat center top;
+		background-size: 247px 80px;
+	}
 }
 .pidelainfo .pidelainfo-brand-fix {
 	position: relative;
@@ -24,7 +35,7 @@ body {
 .pidelainfo .pidelainfo-navigation-holder {
 	background: #ef4a24;
 	position: relative;
-	top: 142px;
+	top: 0;
 	width: 100%;
 }
 .pidelainfo.navbar-default .navbar-nav>.active>a,
@@ -36,6 +47,9 @@ body {
 .pidelainfo.navbar-default .navbar-nav>li>a:focus {
 	color: #2f2f81;
 }
+.pidelainfo.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
 
 /* Index */
 
@@ -44,6 +58,11 @@ body {
 }
 .index-holder .part-1 .one-line-intro {
 	padding: 10px 0 0;
+}
+@media(min-width: 991px) {
+	.index-holder .part-1 .one-line-intro {
+		width: 70%;
+	}
 }
 .index-holder .cta-holder {
 	background: #2c3e50;
@@ -143,7 +162,7 @@ body {
 		top: 7px;
 	}
 	.index-holder .part-2 .learn-more a {
-		font-size: 13px;
+		font-size: 12px;
 	}
 }
 @media(min-width:768px) and (max-width: 991px) {
@@ -253,12 +272,20 @@ body {
 .send-question-holder .extra-info-affix {
 	position: fixed;
 	width: 545px;
-	top: 220px;
+	top: 20px;
 }
 .send-question-holder .extra-info-affix-bottom {
 	position: relative;
 	width: 100%;
 	top: 838px;
+}
+.send-question-holder .main-request {
+	border: 3px solid black;
+	font-family: 'Inconsolata', sans-serif;
+	padding: 25px 20px;
+}
+.send-question-holder .remark {
+	font-weight: bold;
 }
 .pidelainfo .send-question-holder .btn-info {
 	border-color: #2f2f81;
@@ -357,6 +384,33 @@ body {
 	content: " para ";
 }
 
+/* How it Works */
+
+.how-it-works-holder .copy-content {
+	border-right: 1px solid #ccc;
+}
+.how-it-works-holder .copy-menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.how-it-works-holder .copy-menu-affix {
+	position: fixed;
+	width: 360px;
+	top: 20px;
+}
+.how-it-works-holder .copy-menu-affix-bottom {
+	position: relative;
+	width: 100%;
+	top: 2715px;
+}
+.how-it-works-holder .copy-menu .indent-1 {
+	margin: 0 0 0 10px;
+}
+.how-it-works-holder .copy-menu .indent-2 {
+	margin: 0 0 0 20px;
+}
+
 /* Credits */
 .credits-holder {
 	margin: 0 0 40%;
@@ -378,12 +432,46 @@ body {
 	background: #2f2f81;
 	color: white;
 }
+.pidelainfo.footer-holder .hiperderecho-brand {
+	background: url(../images/hiperderecho-logo.png) no-repeat;
+	display: block;
+	font-size: 0;
+	height: 33px;
+	width: 294px;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	.pidelainfo.footer-holder .hiperderecho-brand {
+		background: url(../images/hiperderecho-logo@2x.png) no-repeat center top;
+		background-size: 294px 33px;
+	}
+}
+.pidelainfo.footer-holder .hivos-brand {
+	background: url(../images/hivos-logo.png) no-repeat;
+	display: block;
+	font-size: 0;
+	height: 53px;
+	width: 89px;
+}
+@media(max-width:767px) {
+	.pidelainfo.footer-holder .hivos-brand {
+		margin: 40px 0 0;
+	}
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	.pidelainfo.footer-holder .hivos-brand {
+		background: url(../images/hivos-logo@2x.png) no-repeat center top;
+		background-size: 89px 53px;
+	}
+}
 .pidelainfo.footer-credits-holder {
 	background: #0e0e29;
 	color: white;
 }
 .pidelainfo.footer-credits-holder a {
 	color: white;
+}
+.pidelainfo .pidelainfo-sponsor-copy {
+	margin: 4px 0 0;
 }
 
 /* 404 */

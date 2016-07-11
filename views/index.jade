@@ -6,23 +6,21 @@ block head
 block content
 	div.index-holder.js-content(data-api-url="#{apiUrl}",data-view="index")
 		div.jumbotron.part.part-1.intro
-			h2 Haciendo público tu derecho
-				br
-				| a la información pública
-			h4.one-line-intro Haz una 
-				a(href="/nueva-solicitud") Solicitud de Acceso a la Información pública 
-				| a una entidad del Estado peruano
-			h4 o busca en 
-				a(href="/solicitudes-enviadas") las #{questionsCount} solicitudes 
-				//- | hechas a #{agencies.length} Entidades del Estado
-				| realizadas por otros usuarios.
+			div.container
+				h2 Haciendo público tu derecho
+					br
+					| a la información pública
+				h4.one-line-intro Haz una 
+					a(href="/nueva-solicitud") Solicitud de Acceso a la Información pública 
+					| a una entidad del Estado peruano
+				h4 o busca en 
+					a(href="/solicitudes-enviadas") las #{questionsCount} solicitudes 
+					| realizadas por otros usuarios.
 		div.hidden-xs.hidden-sm.hidden-md.cta-holder
 			h4 ¿Quieres pedir información pública?
-			//- p Pídeles la info
 			a.btn.btn-success(href="/nueva-solicitud") Envía una solicitud
 		div.part.part-2.how-it-works
 			h3 ¿Cómo funciona?
-			//- p Queremos darte la oportunidad de hacer preguntas a las Entidades del estado
 			p Pidela.info es una plataforma web que te permite hacer solicitudes de acceso a la información pública a través de Internet.
 			div.steps
 				div.step.step-1

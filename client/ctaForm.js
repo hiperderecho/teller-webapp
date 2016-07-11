@@ -68,15 +68,15 @@ module.exports = function ( app ) {
 	};
 
 	onTextareaChanged = function () {
-		var $this = $(this);
+		var $this = $( this );
 
 		ctaFormCharCountHolder.text( charCount( $this.val() ) );
 	};
 
 	onWindowScroll = function () {
-		var $window    = $(window)
-		  , topMark    = 220
-		  , bottomMark = 1040
+		var $window    = $( window )
+		  , topMark    = 360
+		  , bottomMark = 1180
 		  ;
 
 		if ( $window.scrollTop() > topMark && $window.scrollTop() < bottomMark ) {

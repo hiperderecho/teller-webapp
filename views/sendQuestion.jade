@@ -2,6 +2,7 @@ extends ./layout.jade
 
 block head
 	title Pidela.info — Enviar Solicitud de Acceso a la Información Pública
+	link(href='https://fonts.googleapis.com/css?family=Inconsolata:400,700',rel='stylesheet',type='text/css')
 	script(src='https://www.google.com/recaptcha/api.js')
 
 block content
@@ -28,7 +29,7 @@ block content
 					div.form-group
 						label(for='ctaFormDni') DNI 
 							span.form-instruction 
-						input#ctaFormDni.form-control(type='number',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='dni',min='10000000',max='99999999')
+						input#ctaFormDni.form-control(type='text',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='dni')
 					div.form-group
 						label(for='ctaFormAddress') Domicilio 
 							span.form-instruction 
@@ -42,15 +43,18 @@ block content
 							span.form-instruction (mínimo 5 carácteres, máximo 60)
 						input#ctaFormTitle.form-control(type='text',placeholder='Describe el tema de tu pedido en pocas palabras.',name='title')
 					div.form-group
-						label(for='ctaFormContent') ¿Qué información quieres solicitar? 
-						span.form-instruction (mínimo 40 carácteres, máximo 800)
-						p Señor Funcionario Responsable de Acceso a la Información Pública
-						p De mi consideración:
-						p Me dirijo a usted en ejercicio de mi derecho de solicitar acceso a la información pública, en los términos en los que está regulado en la Ley de Transparencia y Acceso a la Información Pública y su Reglamento. Conforme al artículo 10 del Reglamento de la referida Ley, este pedido puede realizarse a través de una dirección electrónica dado que toda la información necesaria se acompaña a este mensaje.
-						p Solicito a usted que me proporcione copias electrónicas simples de los siguientes documentos:
-						span.js-char-count.pull-right
-						textarea#ctaFormContent.form-control(rows='10',placeholder='Lista la información que quieres solicitar.',name='content')
-						p Además, preciso que la información solicitada debe de enviarse en formato electrónico mediante mensaje de correo electróncio dirigido a la dirección de origen de este mensaje. Por lo señalado, de acuerdo con el artículo 12 del Reglamento, la respuesta a este pedido no tiene ningún costo.
+						label(for='ctaFormContent') Solicitud 
+						div.main-request
+							p Señor
+							p.remark Funcionario Responsable de Acceso a la Información Pública
+							p De mi consideración:
+							p Me dirijo a usted en ejercicio de mi derecho de solicitar acceso a la información pública, en los términos en los que está regulado en la Ley de Transparencia y Acceso a la Información Pública y su Reglamento. Conforme al artículo 10 del Reglamento de la referida Ley, este pedido puede realizarse a través de una dirección electrónica dado que toda la información necesaria se acompaña a este mensaje.
+							p Solicito a usted que me proporcione copias electrónicas simples de los siguientes documentos:
+							span.js-char-count.pull-right
+							span.form-instruction (mínimo 40 carácteres, máximo 800)
+							textarea#ctaFormContent.form-control(rows='10',placeholder='Lista la información que quieres solicitar.',name='content')
+							p Además, preciso que la información solicitada debe de enviarse en formato electrónico mediante mensaje de correo electróncio dirigido a la dirección de origen de este mensaje. Por lo señalado, de acuerdo con el artículo 12 del Reglamento, la respuesta a este pedido no tiene ningún costo.
+							p Atentamente,
 					div.form-group
 						label Haz clic en la casilla de verificación 
 						div.g-recaptcha(data-sitekey='6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l')

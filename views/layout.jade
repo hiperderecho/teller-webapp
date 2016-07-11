@@ -11,10 +11,10 @@ html(lang="en")
 		title Pidela.info
 
 	body
-		.navbar.navbar-default.navbar-fixed-top.pidelainfo(role="navigation")
+		.navbar.navbar-default.navbar-static-top.pidelainfo(role="navigation")
 			div.pidelainfo-brand-holder
 				div.container
-					a.pidelainfo-brand(href="/") Pidela.info
+					a.pidelainfo-brand.img-responsive(href="/") Pidela.info
 			div.pidelainfo-navigation-holder
 				.container.pidelainfo-brand-fix
 					.navbar-header
@@ -43,12 +43,10 @@ html(lang="en")
 			div.container.meta-holder
 				div.row
 					div.col-md-6
-						a(href="//hiperderecho.org")
-							img.img-responsive(src="/images/hiperderecho-logo.png")
-						p Un proyecto de Hiperderecho financiado por Hivos.
+						a.hiperderecho-brand(href="//hiperderecho.org") Hiperderecho
+						p.pidelainfo-sponsor-copy Un proyecto de Hiperderecho financiado por Hivos.
 					div.col-md-2.col-md-offset-4
-						a(href="//hivos.org")
-							img.img-responsive(src="/images/hivos-logo.png")
+						a.hivos-brand(href="//hivos.org") Hivos
 		div.container-fluid.pidelainfo.footer-credits-holder
 			div.container
 				div.row
