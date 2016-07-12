@@ -30,7 +30,8 @@ module.exports = function ( app ) {
 		              && ctaForm.find('#ctaFormAuthorFullName').val().length < 61
 		              && ctaForm.find('#ctaFormAuthorFullName').val().length > 4 );
 		isValid.push( validators.dni.test( ctaForm.find('#ctaFormDni').val() )
-		              && ctaForm.find('#ctaFormDni').val().length === 8 );
+		              && ctaForm.find('#ctaFormDni').val().length > 3
+		              && ctaForm.find('#ctaFormDni').val().length < 9 );
 		isValid.push( validators.address.test( ctaForm.find('#ctaFormAddress').val() )
 		              && ctaForm.find('#ctaFormAddress').val().length < 100 );
 		isValid.push( validators.email.test( ctaForm.find('#ctaFormAuthor').val() ) );
