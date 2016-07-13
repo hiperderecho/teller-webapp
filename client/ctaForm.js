@@ -47,7 +47,6 @@ module.exports = function ( app ) {
 		if ( isValid.every( function ( e ) { return e; } ) ) {
 
 			ctaFormExtraInfoHolder.parent().hide();
-			$( window ).scrollTop( 0 );
 			ctaFormSuccessMessage.show();
 			$.post( app.apiQuestionsUrl, $this.serialize() )
 			.then( function ( result ) {
@@ -55,6 +54,7 @@ module.exports = function ( app ) {
 
 				$parent.empty();
 				$( createElement( buildOnQuestionSentMessage( result.authorSecret, result.id, result.title ) ) ).appendTo( $parent );
+				$( window ).scrollTop( 0 );
 			} );
 		}
 

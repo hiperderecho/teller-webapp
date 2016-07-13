@@ -13,7 +13,7 @@ block content
 		div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 			- each question in questions
 				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])
-					a(href="/preguntas/" + question.id + "/" + question.slug)
+					a(href="/solicitudes/" + question.id + "/" + question.slug)
 						h4=question.title
 						span=parsedAgencies[question.agencyId]
 						p=question.formattedDate

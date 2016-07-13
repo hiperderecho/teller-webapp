@@ -7,7 +7,7 @@ module.exports = function ( authorSecret, questionId, questionTitle ) {
 	            , [ h('h4', [ 'Gracias por enviar tu pregunta' ] )
 	              , h('p', [ 'Apunta el siguiente código que también ha sido enviado a tu correo para que puedas hacer futuros cambios:' ] )
 	              , h('p', [ authorSecret ] )
-	              , h('a', { attributes: { 'href': '/preguntas/' + questionId + '/' + getSlug( questionTitle ) } } , [ 'Ir a la pregunta' ] )
+	              , h('a', { attributes: { 'href': '/solicitudes/' + questionId + '/' + getSlug( questionTitle ) } } , [ 'Ir a la pregunta' ] )
 	              ]
 	            );
 
