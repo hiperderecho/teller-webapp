@@ -7,29 +7,29 @@ block content
 			//- p=question.publicAuthorEmail
 			p
 				span.remark.author-full-name #{question.authorFullName} 
-				| le hizo esta pregunta a 
+				| envió esta Solicitud  a 
 				span.remark #{question.agencyName} 
 				span.remark(title="#{question.createdAt}") #{question.formattedDate}
 		- if ( question.status === "open" )
-			p Esta pregunta tiene el estado de 
+			p Esta Solicitud tiene el estado de 
 				span.remark #{question.localizedStatus}
-				| , si no tiene respuesta dentro de 10 días desde su creación será considerada 
+				| , si no tiene respuesta dentro de diez (10) días calendario desde su creación será considerada automáticamente como 
 				span.remark Desatendida
 		- if ( question.status === "unanswered" )
-			p Esta pregunta tiene el estado de 
+			p Esta Solicitud tiene el estado de 
 				span.remark #{question.localizedStatus}
 		- if ( question.status === "successful" )
-			p La respuesta de esta pregunta fue 
+			p La respuesta a esta Solicitud fue 
 				span.remark Aceptada 
 				| por su autor
 		- if ( question.status === "unsuccessful" )
-			p.change-status-copy Esta pregunta tiene el estado de 
+			p.change-status-copy Esta Solicitud tiene el estado de 
 				span.remark #{question.localizedStatus}
 				| , si eres el autor puedes 
 			a.change-status.js-change-status(href="#",data-toggle="modal",data-target="#change-status-form-holder") indicar la respuesta como válida
 			br
 		- if ( lastAnswerType === "agency" && question.status !== "successful" )
-			p.keep-answering-copy Esta pregunta ha tenido una respuesta de la Entidad del Estado, si eres el autor puedes 
+			p.keep-answering-copy Esta Solicitud ha recibido una respuesta de la Entidad del Estado, si eres el autor original puedes 
 			a.keep-answering(href="#",data-toggle="modal",data-target="#answer-question-form-holder") responder
 		- endif
 			div.item-content.question-content.dont-break-out Señor Funcionario Responsable de Acceso a la Información Pública 
@@ -108,7 +108,7 @@ block content
 									input(type="radio",name="status",value="unsuccessful")
 									| Fallida
 							.form-group
-								a.js-author-secret-form-send-again(href="#") Soy el autor de esta pregunta y quiero que me envíen de nuevo el código de autor a mi correo
+								a.js-author-secret-form-send-again(href="#") Soy el autor de esta Solicitud y quiero que me envíen de nuevo el código de autor a mi correo
 							.form-group.js-change-status-form-error-message.collapse
 								label Por favor revisa los campos
 							button.btn.btn-default(type='submit') Enviar
@@ -132,7 +132,7 @@ block content
 								span.js-char-count.pull-right
 								textarea#answerQuestionFormContent.form-control(rows='3',placeholder='Mensaje',name='content')
 							.form-group
-								a.js-author-secret-form-send-again(href="#") Soy el autor de esta pregunta y quiero que me envíen de nuevo el código de autor a mi correo
+								a.js-author-secret-form-send-again(href="#") Soy el autor de esta Solicitud y quiero que me envíen de nuevo el código de autor a mi correo
 							.form-group.js-answer-question-form-error-message.collapse
 								label Por favor revisa los campos
 							button.btn.btn-default(type='submit') Enviar
