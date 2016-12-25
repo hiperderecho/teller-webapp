@@ -14,7 +14,8 @@ block content
 			- each question in questions
 				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])
 					a(href="/solicitudes/" + question.id + "/" + question.slug)
+						span.pi-icon(class="pi-icon-#{question.status}") 
 						h4=question.title
-						span=parsedAgencies[question.agencyId]
+						span.for=parsedAgencies[question.agencyId]
 						p=question.formattedDate
 		hr

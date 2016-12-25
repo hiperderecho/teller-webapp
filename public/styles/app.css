@@ -380,7 +380,7 @@ body {
 	margin: 0 0 0 5px;
 	vertical-align: top;
 }
-.browse-questions-holder .question span:before {
+.browse-questions-holder .question span.for:before {
 	content: " para ";
 }
 
