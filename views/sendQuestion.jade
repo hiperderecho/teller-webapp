@@ -18,30 +18,30 @@ block content
 				form#ctaForm
 					div.form-group
 						label(for='ctaFormAgency') Entidad 
-						select#ctaFormAgency.form-control(name='agencyId')
+						select#ctaFormAgency.form-control.to-validate(name='agencyId')
 							option(value='') Elige una entidad de la lista.
 							- each agency in agencies
 								option(value=agency.id)=agency.name
 					div.form-group
 						label(for='ctaFormAuthorFullName') Nombre completo 
 							span.form-instruction (mínimo 5 carácteres, máximo 60)
-						input#ctaFormAuthorFullName.form-control(type='text',placeholder='Recuerda usar tu nombre verdadero.',name='authorFullName')
+						input#ctaFormAuthorFullName.form-control.to-validate(type='text',placeholder='Recuerda usar tu nombre verdadero.',name='authorFullName')
 					div.form-group
 						label(for='ctaFormDni') DNI 
 							span.form-instruction 
-						input#ctaFormDni.form-control(type='text',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='dni')
+						input#ctaFormDni.form-control.to-validate(type='text',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='dni')
 					div.form-group
 						label(for='ctaFormAddress') Domicilio 
 							span.form-instruction 
-						input#ctaFormAddress.form-control(type='text',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='address')
+						input#ctaFormAddress.form-control.to-validate(type='text',placeholder='Le enviaremos esta información a la entidad pero no la publicaremos aquí.',name='address')
 					div.form-group
 						label(for='ctaFormAuthor') Correo electrónico 
 							span.form-instruction (nunca lo usaremos para enviarte publicidad)
-						input#ctaFormAuthor.form-control(type='email',placeholder='Por este medio te contactaremos cuando tu Solicitud sea contestada.',name='author')
+						input#ctaFormAuthor.form-control.to-validate(type='email',placeholder='Por este medio te contactaremos cuando tu Solicitud sea contestada.',name='author')
 					div.form-group
 						label(for='ctaFormTitle') Sumilla 
 							span.form-instruction (mínimo 5 carácteres, máximo 60)
-						input#ctaFormTitle.form-control(type='text',placeholder='Describe el tema de tu pedido en pocas palabras.',name='title')
+						input#ctaFormTitle.form-control.to-validate(type='text',placeholder='Describe el tema de tu pedido en pocas palabras.',name='title')
 					div.form-group
 						label(for='ctaFormContent') Solicitud 
 						div.main-request
@@ -52,13 +52,13 @@ block content
 							p Solicito a usted que me proporcione copias electrónicas simples de los siguientes documentos:
 							span.js-char-count.pull-right
 							span.form-instruction (mínimo 40 carácteres, máximo 800)
-							textarea#ctaFormContent.form-control(rows='10',placeholder='Lista la información que quieres solicitar.',name='content')
+							textarea#ctaFormContent.form-control.to-validate(rows='10',placeholder='Lista la información que quieres solicitar.',name='content')
 							p
 							p Además, preciso que la información solicitada debe de enviarse en formato electrónico mediante mensaje de correo electróncio dirigido a la dirección de origen de este mensaje. Por lo señalado, de acuerdo con el artículo 12 del Reglamento, la respuesta a este pedido no tiene ningún costo.
 							p Atentamente,
 					div.form-group
 						label Haz clic en la casilla de verificación 
-						div.g-recaptcha(data-sitekey='6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l')
+						div.g-recaptcha.form-control.to-validate(data-callback='onGrecaptchaChecked',data-sitekey='6Ldi_hMTAAAAACr5PBZqAPIWJvN7X4D7mb4HsC4l')
 					div.form-group
 						p.alert.alert-danger.collapse.js-cta-form-error-message No hemos podido enviar tu Solicitud. Asegúrate que has completado todos los campos y no has excedido la extensión máximo de caracteres.
 						p.alert.alert-success.collapse.js-cta-form-success-message Tu solicitud fue enviada

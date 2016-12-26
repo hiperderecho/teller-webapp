@@ -287,6 +287,11 @@ body {
 .send-question-holder .remark {
 	font-weight: bold;
 }
+.send-question-holder .g-recaptcha.form-control {
+	height: 80px;
+	padding: 0;
+	width: 306px;
+}
 .pidelainfo .send-question-holder .btn-info {
 	border-color: #2f2f81;
 	background: #2f2f81;
