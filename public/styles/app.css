@@ -194,6 +194,7 @@ body {
 }
 .index-holder .part-3 .agencies {
 	list-style-type: none;
+	padding: 0;
 }
 .index-holder .part-3 .question a:hover h4 {
 	text-decoration: underline;
