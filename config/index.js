@@ -3,7 +3,7 @@ module.exports =
           , views           : { index: { questionsLimit: 10 } }
           , cookieNameSpace : 'Pidela.info-authorSecret'
           , localizedStatus : { successful  : 'Válida'
-                              , unsuccessful: 'Insatisfactoria'
+                              , unsuccessful: 'Respondida'
                               , unanswered  : 'Desatendida'
                               , open        : 'Abierta' }
           , flaggedStatus   : 'flagged'

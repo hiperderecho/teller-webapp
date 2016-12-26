@@ -456,7 +456,7 @@ var init = function () {
 
 	// Global icons
 	$('span.remark:contains("Abierta")')        .addClass('pi-icon pi-icon-open');
-	$('span.remark:contains("Insatisfactoria")').addClass('pi-icon pi-icon-unsuccessful');
+	$('span.remark:contains("Respondida")')     .addClass('pi-icon pi-icon-unsuccessful');
 	$('span.remark:contains("Aceptada")')       .addClass('pi-icon pi-icon-successful');
 	$('span.remark:contains("Desatendida")')    .addClass('pi-icon pi-icon-unanswered');
 };
@@ -783,7 +783,7 @@ module.exports =
           , views           : { index: { questionsLimit: 10 } }
           , cookieNameSpace : 'Pidela.info-authorSecret'
           , localizedStatus : { successful  : 'Válida'
-                              , unsuccessful: 'Insatisfactoria'
+                              , unsuccessful: 'Respondida'
                               , unanswered  : 'Desatendida'
                               , open        : 'Abierta' }
           , flaggedStatus   : 'flagged'
