@@ -9,6 +9,7 @@ block content
 				span.remark.author-full-name #{question.authorFullName} 
 				| envió esta Solicitud  a 
 				span.remark #{question.agencyName} 
+				span el 
 				span.remark(title="#{question.createdAt}") #{question.formattedDate}
 		- if ( question.status === "open" )
 			p Esta Solicitud tiene el estado de 
@@ -52,11 +53,13 @@ block content
 						div.item-content.answer-content.dont-break-out(class=answer.type)
 							- if ( answer.type === "agency" )
 								p(title=answer.createdAt)
+									span El 
 									span.remark #{answer.formattedDate} 
 									span.remark #{question.agencyName} 
 									| respondió:
 							- if ( answer.type === "author" )
 								p(title=answer.createdAt)
+									span El 
 									span.remark #{answer.formattedDate} 
 									span.author-full-name.remark #{question.authorFullName} 
 									| respondió:

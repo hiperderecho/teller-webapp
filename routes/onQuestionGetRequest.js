@@ -21,7 +21,7 @@ module.exports = function ( request, response ) {
 
 		result.answers.forEach( function ( answer ) {
 
-			answer.formattedDate = moment( answer.createdAt ).fromNow();
+			answer.formattedDate = moment( answer.createdAt ).format('LL');
 			lastAnswerType = answer.type;
 
 			if ( !!answer.attachments ) {
@@ -36,7 +36,7 @@ module.exports = function ( request, response ) {
 		} );
 
 		result.question.agencyName      = parsedAgencies[ result.question.agencyId ];
-		result.question.formattedDate   = moment( result.question.createdAt ).fromNow();
+		result.question.formattedDate   = moment( result.question.createdAt ).format('LL');
 		result.question.localizedStatus = config.webapp.localizedStatus[ result.question.status ];
 
 		response.render( 'question', { apiUrl: config.webapp.apiUrl, id: id, question: result.question, answers: result.answers, lastAnswerType: lastAnswerType } );
