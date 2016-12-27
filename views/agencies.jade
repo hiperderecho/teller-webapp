@@ -1,0 +1,25 @@
+extends ./layout.jade
+
+block head
+	title Pidela.info — Entidades
+
+block content
+	div.agencies-holder
+		h1 Entidades participantes
+		div.row
+			div.col-md-6
+				div.extra-info-holder
+					h3 Las más solicitadas
+					p Estas son las Entidades que han recibido más solicitudes en Pidela.info
+				ul.list-of-agencies.agencies-by-sent
+					- each agency in agenciesBySentMetaStatus
+						li
+							a(href="/solicitudes-enviadas/"+agency.slug)=agency.name
+			div.col-md-6
+				div.extra-info-holder
+					h3 Las que más responden
+					p Estas son las Entidades que han respondido la mayor cantidad de solicitudes en Pidela.info
+				ul.list-of-agencies.agencies-by-answered
+					- each agency in agenciesByAnsweredMetaStatus
+						li
+							a(href="/solicitudes-enviadas/"+agency.slug)=agency.name

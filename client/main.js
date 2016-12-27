@@ -4,6 +4,7 @@ var views =
 , question        : require('./question')
 , ctaForm         : require('./ctaForm')
 , browseQuestions : require('./browseQuestions')
+, agencies        : require('./agencies')
 , credits         : require('./credits')
 , howItWorks      : require('./howItWorks')
 };

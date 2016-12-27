@@ -390,6 +390,19 @@ body {
 	content: " para ";
 }
 
+/* Agencies */
+
+.agencies-holder {
+	min-height: 500px;
+}
+.agencies-holder .extra-info-holder {
+	min-height: 81px;
+}
+.agencies-holder .list-of-agencies {
+	list-style: none;
+	padding: 0;
+}
+
 /* How it Works */
 
 .how-it-works-holder .copy-content {

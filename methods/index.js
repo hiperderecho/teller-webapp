@@ -15,6 +15,7 @@ exports.getAnswersByQuestionId = require( './getAnswersByQuestionId' );
 exports.getIndexViewResources           = require( './getIndexViewResources' );
 exports.getQuestionViewResources        = require( './getQuestionViewResources' );
 exports.getBrowseQuestionsViewResources = require( './getBrowseQuestionsViewResources' );
+exports.getAgenciesViewResources        = require( './getAgenciesViewResources' );
 
 // Utils
 exports.parseAgenciesForInterpolationFromAgenciesModel = require( './parseAgenciesForInterpolationFromAgenciesModel' );
