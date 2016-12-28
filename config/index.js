@@ -7,6 +7,11 @@ module.exports =
                               , unanswered  : 'Desatendida'
                               , open        : 'Abierta' }
           , flaggedStatus   : 'flagged'
+          , metaStatuses    : { 'open'        : 'sent'
+                              , 'unanswered'  : 'sent'
+                              , 'successful'  : 'answered'
+                              , 'unsuccessful': 'answered'
+                              }
           , messages : { questionView : { authorSecretMismatch : '<h4>Hubo un error</h4><p>El código no coincide.</p>'
                                         , questionWasUpdated   : '<h4>La pregunta fue actualizada</h4>'
                                         , authorSecretSent     : '<p>El código de esta pregunta fue enviado al correo del Autor</p>'

@@ -1,5 +1,6 @@
 var createElement = require('virtual-dom/create-element');
 
+var config                      = require('../config');
 var buildQuestion               = require('./utils/buildQuestion');
 var buildNoResultsAndCtaMessage = require('./utils/buildNoResultsAndCtaMessage');
 var substringMatcher            = require('./utils/substringMatcher');
@@ -9,20 +10,25 @@ module.exports = function ( app ) {
 	var questionsHolder = $('div.js-questions')
 	  , questionList    = $('div.js-question')
 	  , questionSearch  = $('input.js-question-search')
-	  , searchData      = []
+	  , filterBtns      = $('label.js-btn-filter')
+	  , filterResetBtn  = $('label.js-btn-filter-reset')
+	  , filterData      = []
+	  , metaStatuses    = {}
 	// fn declarations
 	  , buildResults
-	  , populateSearchData
+	  , populateFilterData
+	  , resetFilter
 	  ;
 
-	populateSearchData = function () {
+	populateFilterData = function () {
 
-		questionList.each( function ( i, serverRenderedQuestion ) {
+		filterData = questionList.toArray().map( function ( serverRenderedQuestion ) {
 
-			searchData.push( { id        : $( serverRenderedQuestion ).data('id')
-			                 , title     : $( serverRenderedQuestion ).data('title')
-			                 , agencyName: $( serverRenderedQuestion ).data('agency-name')
-			                 } );
+			return { id        : $( serverRenderedQuestion ).data('id')
+				     , title     : $( serverRenderedQuestion ).data('title')
+				     , agencyName: $( serverRenderedQuestion ).data('agency-name')
+				     , status    : $( serverRenderedQuestion ).data('status')
+				     };
 		} );
 	};
 
@@ -43,14 +49,26 @@ module.exports = function ( app ) {
 		} );
 	};
 
-	questionSearch.on( 'input', function () {
-		var $this = $(this);
+	resetFilter = function () {
 
 		questionsHolder.empty();
-		substringMatcher( searchData )( $this.val(), buildResults );
-	} );
+		buildResults( filterData );
+	};
 
-	populateSearchData();
+	filterResetBtn.on('click', resetFilter);
+	filterBtns.on('click', function () {
+		var $this = $(this)
+		  , filteredData
+		  ;
+
+		questionsHolder.empty();
+		filteredData = filterData.filter( function ( question ) {
+
+			return config.webapp.metaStatuses[ question.status ] === $this.data('filter-type') ? question : null;
+		} );
+		buildResults( filteredData );
+	} );
+	populateFilterData();
 	Promise.resolve( resetNavbarSections() )
 	.then( function () {
 

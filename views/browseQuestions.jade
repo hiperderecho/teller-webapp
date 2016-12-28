@@ -10,9 +10,23 @@ block content
 		div.search-holder.js-search-holder
 			div.form-group
 				input.form-control.js-question-search(type="text",placeholder="Busca por entidad, tema o palabra clave.")
+			div.form-group.pull-right
+				button.btn.btn-info.btn-sm Buscar
+			div.form-group
+				p Mostrando 
+				div.btn-group.btn-group-sm(data-toggle="buttons")
+					label.btn.btn-success.active.js-btn-filter-reset
+						input(type="radio",name="statuses",autocomplete="off")
+						| Todas
+					label.btn.btn-success.js-btn-filter(data-filter-type="answered")
+						input(type="radio",name="statuses",autocomplete="off")
+						| Respondidas
+					label.btn.btn-success.js-btn-filter(data-filter-type="sent")
+						input(type="radio",name="statuses",autocomplete="off")
+						| Por responder
 		div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 			- each question in questions
-				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])
+				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId],data-status=question.status)
 					a(href="/solicitudes/" + question.id + "/" + question.slug)
 						span.pi-icon(class="pi-icon-#{question.status}") 
 						h4=question.title
