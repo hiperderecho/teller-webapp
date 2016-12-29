@@ -22,6 +22,7 @@ module.exports = function ( app ) {
 	// fn declarations
 	  , buildResults
 	  , main
+	  , manageNoResults
 	  , navigateToPage
 	  , onFilterBtnsClicked
 	  , onSearchFormSubmitted
@@ -130,15 +131,25 @@ module.exports = function ( app ) {
 		}
 	};
 
+	manageNoResults = function () {
+		criteria = {};
+		questionsHolder.empty();
+		paginationPage.parent().parent().hide();
+		filterBtns.parent().parent().hide()
+		$( createElement(  buildNoResultsAndCtaMessage() ) ).appendTo( questionsHolder );
+		Promise.resolve( resetNavbarSections() )
+		.then( function () {
+
+			$('li.navbar-browse-questions').addClass('active');
+		} );
+	};
+
 	if ( window.location.search === '?error' ) {
 		$('p.js-error-alert').removeClass('collapse');
 		criteria = {};
 	} else {
 		if ( window.location.search === '?sin-resultados' ) {
-			questionsHolder.empty();
-			paginationPage.parent().parent().hide();
-			filterBtns.parent().parent().hide()
-			$( createElement(  buildNoResultsAndCtaMessage() ) ).appendTo( questionsHolder );
+			manageNoResults();
 		} else {
 			try {
 				criteria = !!window.location.search ? JSON.parse( decodeURI( window.location.search.split('=')[1] ) ) : {};

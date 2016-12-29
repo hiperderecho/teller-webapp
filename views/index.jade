@@ -7,7 +7,7 @@ block content
 	div.index-holder.js-content(data-api-url="#{apiUrl}",data-view="index")
 		div.jumbotron.part.part-1.intro
 			div.container
-				h2 Haciendo público tu derecho
+				h1.pidelainfo Haciendo público tu derecho
 					br
 					| a la información pública
 				h4.one-line-intro Haz una 
@@ -56,7 +56,8 @@ block content
 						- each question in questions
 							div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId])
 								a(href="/solicitudes/" + question.id + "/" + question.slug)
+									span.pi-icon.pi-icon-lg(class="pi-icon-#{question.status}")
 									h4=question.title
-									span=parsedAgencies[question.agencyId]
+									span.for=parsedAgencies[question.agencyId]
 									p=question.formattedDate
 		hr

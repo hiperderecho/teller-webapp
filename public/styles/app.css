@@ -2,6 +2,13 @@ body {
 	padding-top: 0;
 }
 
+/* Brand */
+
+h1.pidelainfo {
+	font-size: 32px;
+	line-height: 35.2px;
+}
+
 /* Nav brand */
 
 .pidelainfo .pidelainfo-brand-holder {
@@ -207,19 +214,19 @@ body {
 	margin: 0;
 	vertical-align: top;
 }
-.index-holder .part-3 .question span {
+.index-holder .part-3 .question span.for {
 	display: inline-block;
 	margin: 0 0 0 5px;
 	vertical-align: top;
 }
-.index-holder .part-3 .question span:before {
+.index-holder .part-3 .question span.for:before {
 	content: " para ";
 }
 
 .pidelainfo .index-holder .jumbotron {
 	background-color: #ddddf2;
 }
-.pidelainfo .index-holder .jumbotron h2,
+.pidelainfo .index-holder .jumbotron h1,
 .pidelainfo .index-holder .jumbotron a {
 	color: #2f2f81;
 }
