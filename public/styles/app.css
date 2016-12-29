@@ -389,6 +389,38 @@ body {
 .browse-questions-holder .question span.for:before {
 	content: " para ";
 }
+.browse-questions-holder .pagination-holder {
+	text-align: center;
+}
+.pidelainfo .browse-questions-holder .btn-info {
+	border-color: #2f2f81;
+	background: #2f2f81;
+	color: white;
+}
+.pidelainfo .browse-questions-holder .btn-info:hover {
+	background: #0e0e29;
+}
+.pidelainfo .browse-questions-holder .btn-success {
+	border-color: #ef4a24;
+	background: #ef4a24;
+	color: white;
+}
+.pidelainfo .browse-questions-holder .btn-success:hover,
+.pidelainfo .browse-questions-holder .btn-success.active {
+	border-color: #98250b;
+	background: #98250b;
+}
+.pidelainfo .browse-questions-holder .pagination>li>a,
+.pidelainfo .browse-questions-holder .pagination>li>span {
+	border-color: #ef4a24;
+	background: #ef4a24;
+	color: white;
+}
+.pidelainfo .browse-questions-holder .pagination>li.active>a,
+.pidelainfo .browse-questions-holder .pagination>li.active>span {
+	border-color: #98250b;
+	background: #98250b;
+}
 
 /* Agencies */
 

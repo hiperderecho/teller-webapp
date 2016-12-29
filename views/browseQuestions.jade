@@ -9,7 +9,7 @@ block content
 			a.close(href="#",data-dismiss="alert" aria-label="close") &times; 
 			| Hubo un error con tu búsqueda, por favor intentalo de nuevo.
 		h2 Solicitudes enviadas
-		p Aquí puedes consultar todas las solicitudes que han enviado otros usuarios.
+		p Usa el formulario para buscar por Entidad o Palabra clave. Luego dale clic a Buscar.
 		div.search-holder.js-search-holder
 			form.js-question-search-form(action="/")
 				div.form-group
@@ -19,11 +19,12 @@ block content
 						- each agency in agencies
 								option(value=agency.name)=agency.name
 				div.form-group
-					input.form-control.js-question-search(type="text",placeholder="Busca por entidad, tema o palabra clave.")
+					input.form-control.js-question-search(type="text",placeholder="Palabra clave.")
 				div.form-group
-					input.btn.btn-info.btn-sm(type="submit",value="Buscar")
+					input.btn.btn-info.pidelainfo(type="submit",value="Buscar")
+			hr
 			div.form-group
-				p Mostrando 
+				p Puedes filtrar los resultados. 
 				div.btn-group.btn-group-sm(data-toggle="buttons")
 					label.btn.btn-success.active.js-btn-filter-reset
 						input(type="radio",name="statuses",autocomplete="off")
@@ -34,7 +35,6 @@ block content
 					label.btn.btn-success.js-btn-filter(data-filter-type="sent")
 						input(type="radio",name="statuses",autocomplete="off")
 						| Por responder
-		hr
 		div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 			- each question in questions
 				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId],data-status=question.status)
@@ -43,11 +43,12 @@ block content
 						h4=question.title
 						span.for=parsedAgencies[question.agencyId]
 						p=question.formattedDate
-		ul.pagination
-			- var pageCount = 1;
-			- while ( pages-- ) {
-				li
-					a.js-pagination-page(href="",data-page=pageCount)=pageCount
-			- 	pageCount++;
-			- }
 		hr
+		div.pagination-holder
+			ul.pagination
+				- var pageCount = 1;
+				- while ( pages-- ) {
+					li
+						a.js-pagination-page(href="",data-page=pageCount)=pageCount
+				- 	pageCount++;
+				- }

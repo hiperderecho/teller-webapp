@@ -111,7 +111,6 @@ module.exports = function ( app ) {
 		} else {
 			delete criteria.q;
 		}
-		console.log('criteria to send', criteria);
 		window.location.href = '?criteria=' + JSON.stringify( criteria );
 		return;
 	};
@@ -155,9 +154,7 @@ module.exports = function ( app ) {
 		} else {
 			try {
 				criteria = !!window.location.search ? JSON.parse( decodeURI( window.location.search.split('=')[1] ) ) : {};
-				console.log('criteria try', criteria);
 			} catch ( e ) {
-				console.log('sup');
 				window.location.href = '/solicitudes-enviadas/?error';
 			}
 		}
