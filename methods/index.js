@@ -1,9 +1,10 @@
 var exports = module.exports = {};
 
 // Questions
-exports.getListOfQuestions      = require( './getListOfQuestions' );
-exports.getQuestionByQuestionId = require( './getQuestionByQuestionId' );
-exports.getQuestionsCount       = require( './getQuestionsCount' );
+exports.getListOfQuestions           = require( './getListOfQuestions' );
+exports.getQuestionByQuestionId      = require( './getQuestionByQuestionId' );
+exports.getQuestionsCount            = require( './getQuestionsCount' );
+exports.getQuestionsBySearchCriteria = require( './getQuestionsBySearchCriteria' );
 
 // Agencies
 exports.getListOfAgencies = require( './getListOfAgencies' );

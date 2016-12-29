@@ -19,18 +19,44 @@ var substringMatcher            = require('./utils/substringMatcher');
 var resetNavbarSections         = require('./utils/resetNavbarSections');
 
 module.exports = function ( app ) {
-	var questionsHolder = $('div.js-questions')
-	  , questionList    = $('div.js-question')
-	  , questionSearch  = $('input.js-question-search')
-	  , filterBtns      = $('label.js-btn-filter')
-	  , filterResetBtn  = $('label.js-btn-filter-reset')
-	  , filterData      = []
-	  , metaStatuses    = {}
+	var questionsHolder    = $('div.js-questions')
+	  , questionList       = $('div.js-question')
+	  , agenciesList       = $('select.js-agencies-list')
+	  , questionSearch     = $('input.js-question-search')
+	  , questionSearchForm = $('form.js-question-search-form')
+	  , filterBtns         = $('label.js-btn-filter')
+	  , filterResetBtn     = $('label.js-btn-filter-reset')
+	  , paginationPage     = $('a.js-pagination-page')
+	  , filterData         = []
+	  , metaStatuses       = {}
+	  , criteria
+	  , criteriaItems
 	// fn declarations
 	  , buildResults
+	  , main
+	  , navigateToPage
+	  , onFilterBtnsClicked
+	  , onSearchFormSubmitted
 	  , populateFilterData
 	  , resetFilter
+	  , setCriteriaStatusToHtmlElements
 	  ;
+
+	if ( window.location.search === '?error' ) {
+		$('p.js-error-alert').removeClass('collapse');
+		criteria = {};
+	} else {
+		try {
+			criteria = !!window.location.search ? JSON.parse( decodeURI( window.location.search.split('=')[1] ) ) : {};
+		} catch ( e ) {
+			window.location.href = '/solicitudes-enviadas/?error';
+		}
+	}
+	criteriaItems = Object.keys( criteria );
+	if ( criteriaItems.length > 3
+	     || criteriaItems.some( function ( criteriaItem ) { return !_.includes( ['page','pagina','q','entidad','agency'], criteriaItem ) } ) ) {
+		window.location.href = '/solicitudes-enviadas/?error';
+	}
 
 	populateFilterData = function () {
 
@@ -67,8 +93,7 @@ module.exports = function ( app ) {
 		buildResults( filterData );
 	};
 
-	filterResetBtn.on('click', resetFilter);
-	filterBtns.on('click', function () {
+	onFilterBtnsClicked = function () {
 		var $this = $(this)
 		  , filteredData
 		  ;
@@ -79,13 +104,70 @@ module.exports = function ( app ) {
 			return config.webapp.metaStatuses[ question.status ] === $this.data('filter-type') ? question : null;
 		} );
 		buildResults( filteredData );
-	} );
-	populateFilterData();
-	Promise.resolve( resetNavbarSections() )
-	.then( function () {
+	};
 
-		$('li.navbar-browse-questions').addClass('active');
-	} );
+	onSearchFormSubmitted = function ( e ) {
+
+		e.preventDefault();
+		if ( agenciesList.find('option:selected').val() ) {
+			criteria.entidad = agenciesList.find('option:selected').val();
+			criteria.pagina  = 1;
+		} else {
+			delete criteria.entidad;
+		}
+		if ( questionSearch.val() ) {
+			criteria.q      = questionSearch.val();
+			criteria.pagina = 1;
+		} else {
+			delete criteria.q;
+		}
+		window.location.href = '?criteria=' + JSON.stringify( criteria );
+		return;
+	};
+
+	navigateToPage = function ( e ) {
+		var $this = $(this);
+
+		e.preventDefault();
+		criteria.pagina = $this.data('page');
+		window.location.href = '?criteria=' + JSON.stringify( criteria );
+		return;
+	};
+
+	setCriteriaStatusToHtmlElements = function () {
+		var agency = criteria.entidad || criteria.agency;
+		var page   = criteria.pagina  || criteria.page;
+
+		if ( criteria.q ) {
+			questionSearch.val( criteria.q );
+		}
+		if ( agency ) {
+			agenciesList.find('option[value="'+agency+'"]').prop('selected','selected');
+		}
+		if ( page ) {
+			$('a.js-pagination-page').parent().removeClass('active');
+			$('a.js-pagination-page[data-page="'+page+'"]').parent().addClass('active');
+		} else {
+			$('a.js-pagination-page[data-page="1"]').parent().addClass('active');
+		}
+	};
+
+	main = function () {
+
+		setCriteriaStatusToHtmlElements();
+		questionSearchForm.on('submit', onSearchFormSubmitted );
+		filterResetBtn.on('click', resetFilter );
+		filterBtns.on('click', onFilterBtnsClicked );
+		paginationPage.on('click', navigateToPage );
+		populateFilterData();
+		Promise.resolve( resetNavbarSections() )
+		.then( function () {
+
+			$('li.navbar-browse-questions').addClass('active');
+		} );
+	};
+
+	main();
 };
 },{"../config":20,"./utils/buildNoResultsAndCtaMessage":12,"./utils/buildQuestion":15,"./utils/resetNavbarSections":17,"./utils/substringMatcher":18,"virtual-dom/create-element":214}],3:[function(require,module,exports){
 var resetNavbarSections = require('./utils/resetNavbarSections');
