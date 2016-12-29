@@ -41,7 +41,7 @@ module.exports = function ( request, response ) {
 				                                    } );
 				return;
 			}
-			response.redirect( '/solicitudes-enviadas/?error' );
+			response.redirect( '/solicitudes-enviadas/?sin-resultados' );
 		} )
 		.catch( function ( error ) {
 

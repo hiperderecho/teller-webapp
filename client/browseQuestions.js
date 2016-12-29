@@ -27,24 +27,14 @@ module.exports = function ( app ) {
 	  , onSearchFormSubmitted
 	  , populateFilterData
 	  , resetFilter
+	  , testValidSearchCriteria
 	  , setCriteriaStatusToHtmlElements
 	  ;
 
-	if ( window.location.search === '?error' ) {
-		$('p.js-error-alert').removeClass('collapse');
-		criteria = {};
-	} else {
-		try {
-			criteria = !!window.location.search ? JSON.parse( decodeURI( window.location.search.split('=')[1] ) ) : {};
-		} catch ( e ) {
-			window.location.href = '/solicitudes-enviadas/?error';
-		}
-	}
-	criteriaItems = Object.keys( criteria );
-	if ( criteriaItems.length > 3
-	     || criteriaItems.some( function ( criteriaItem ) { return !_.includes( ['page','pagina','q','entidad','agency'], criteriaItem ) } ) ) {
-		window.location.href = '/solicitudes-enviadas/?error';
-	}
+	testValidSearchCriteria = function ( criteriaItem ) {
+
+		return !_.includes( ['page','pagina','q','entidad','agency'], criteriaItem )
+	};
 
 	populateFilterData = function () {
 
@@ -109,6 +99,7 @@ module.exports = function ( app ) {
 		} else {
 			delete criteria.q;
 		}
+		console.log('criteria to send', criteria);
 		window.location.href = '?criteria=' + JSON.stringify( criteria );
 		return;
 	};
@@ -139,6 +130,30 @@ module.exports = function ( app ) {
 			$('a.js-pagination-page[data-page="1"]').parent().addClass('active');
 		}
 	};
+
+	if ( window.location.search === '?error' ) {
+		$('p.js-error-alert').removeClass('collapse');
+		criteria = {};
+	} else {
+		if ( window.location.search === '?sin-resultados' ) {
+			questionsHolder.empty();
+			paginationPage.parent().parent().hide();
+			filterBtns.parent().parent().hide()
+			$( createElement(  buildNoResultsAndCtaMessage() ) ).appendTo( questionsHolder );
+		} else {
+			try {
+				criteria = !!window.location.search ? JSON.parse( decodeURI( window.location.search.split('=')[1] ) ) : {};
+				console.log('criteria try', criteria);
+			} catch ( e ) {
+				console.log('sup');
+				window.location.href = '/solicitudes-enviadas/?error';
+			}
+		}
+	}
+	criteriaItems = criteria && Object.keys( criteria );
+	if ( criteriaItems.length > 3 || criteriaItems.some( testValidSearchCriteria ) ) {
+		window.location.href = '/solicitudes-enviadas/?error';
+	}
 
 	main = function () {
 
