@@ -381,7 +381,7 @@ body {
 	margin: 0;
 	vertical-align: top;
 }
-.browse-questions-holder .question span {
+.browse-questions-holder .question span.for {
 	display: inline-block;
 	margin: 0 0 0 5px;
 	vertical-align: top;
@@ -536,6 +536,13 @@ body {
 .pi-icon:before {
 	font-family: FontAwesome;
 	margin: 0 2px 0 0;
+}
+.pi-icon-lg {
+	display: inline-block;
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+	width: 25px;
 }
 .pi-icon-open:before {
 	content: "\f01c";
