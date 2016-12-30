@@ -15,12 +15,15 @@ module.exports = function ( app ) {
 	  , filterBtns         = $('label.js-btn-filter')
 	  , filterResetBtn     = $('label.js-btn-filter-reset')
 	  , paginationPage     = $('a.js-pagination-page')
+	  , criteriaExplanation= $('p.js-criteria-explanation')
+	  , showFormBtn        = $('button.js-show-search-form-btn')
 	  , filterData         = []
 	  , metaStatuses       = {}
 	  , criteria
-	  , criteriaItems
+	  , criteriaKeys
 	// fn declarations
 	  , buildResults
+	  , explainStateUsingCriteria
 	  , main
 	  , manageNoResults
 	  , navigateToPage
@@ -30,11 +33,44 @@ module.exports = function ( app ) {
 	  , resetFilter
 	  , testValidSearchCriteria
 	  , setCriteriaStatusToHtmlElements
+	  , showForm
 	  ;
 
-	testValidSearchCriteria = function ( criteriaItem ) {
+	showForm = function () {
 
-		return !_.includes( ['page','pagina','q','entidad','agency'], criteriaItem )
+		questionSearchForm.slideDown();
+		$(this).hide();
+		delete criteria.colapsar;
+		delete criteria.collapse;
+	};
+
+	explainStateUsingCriteria = function ( criteria, filter ) {
+		var page   = criteria['pagina'] || criteria['page'] || 1;
+		var agency = criteria['agency'] || criteria['entidad'];
+		var q      = criteria['q'];
+		var toReturn;
+
+		if ( !Object.keys( criteria ).length ) {
+			toReturn = 'Mostrando <span class="remark">la primera página</span> de todas las Solicitudes';
+		} else if ( page && !agency && !q ) {
+			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de todas las Solicitudes';
+		} else if ( agency && q ) {
+			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de las solicitudes enviadas a la entidad <span class="remark">' + agency + '</span> usando la palabra clave <span class="remark">'+ q +'</span>';
+		} else if ( agency ) {
+			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de las solicitudes enviadas a la entidad <span class="remark">' + agency + '</span>';
+		} else if ( q ) {
+			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de las solicitudes enviadas que coinciden con la palabra clave <span class="remark">' + q +'</span>';
+		}
+		if ( filter ) {
+			toReturn += ' y filtrando por <span class="remark">'+ filter +'</span>';
+		}
+		toReturn = toReturn + '.';
+		return toReturn;
+	};
+
+	testValidSearchCriteria = function ( criteriaKey ) {
+
+		return !_.includes( ['page','pagina','q','entidad','agency','collapse','colapsar'], criteriaKey )
 	};
 
 	populateFilterData = function () {
@@ -70,6 +106,7 @@ module.exports = function ( app ) {
 
 		questionsHolder.empty();
 		buildResults( filterData );
+		criteriaExplanation.html( explainStateUsingCriteria( criteria ) );
 	};
 
 	onFilterBtnsClicked = function () {
@@ -83,6 +120,7 @@ module.exports = function ( app ) {
 			return config.webapp.metaStatuses[ question.status ] === $this.data('filter-type') ? question : null;
 		} );
 		buildResults( filteredData );
+		criteriaExplanation.html( explainStateUsingCriteria( criteria, $this.text() ) );
 	};
 
 	onSearchFormSubmitted = function ( e ) {
@@ -114,9 +152,14 @@ module.exports = function ( app ) {
 	};
 
 	setCriteriaStatusToHtmlElements = function () {
-		var agency = criteria.entidad || criteria.agency;
-		var page   = criteria.pagina  || criteria.page;
+		var agency   = criteria.entidad  || criteria.agency;
+		var page     = criteria.pagina   || criteria.page;
+		var collapse = criteria.colapsar || criteria.collapse;
 
+		if ( collapse ) {
+			questionSearchForm.addClass('collapse');
+			showFormBtn.show();
+		}
 		if ( criteria.q ) {
 			questionSearch.val( criteria.q );
 		}
@@ -158,18 +201,21 @@ module.exports = function ( app ) {
 			}
 		}
 	}
-	criteriaItems = criteria && Object.keys( criteria );
-	if ( criteriaItems.length > 3 || criteriaItems.some( testValidSearchCriteria ) ) {
+	criteriaKeys = criteria && Object.keys( criteria );
+	if ( criteriaKeys.length > 4 || criteriaKeys.some( testValidSearchCriteria ) ) {
 		window.location.href = '/solicitudes-enviadas/?error';
 	}
 
 	main = function () {
 
+		showFormBtn.hide();
+		criteriaExplanation.html( explainStateUsingCriteria( criteria ) );
 		setCriteriaStatusToHtmlElements();
 		questionSearchForm.on('submit', onSearchFormSubmitted );
 		filterResetBtn.on('click', resetFilter );
 		filterBtns.on('click', onFilterBtnsClicked );
 		paginationPage.on('click', navigateToPage );
+		showFormBtn.on('click', showForm );
 		populateFilterData();
 		Promise.resolve( resetNavbarSections() )
 		.then( function () {

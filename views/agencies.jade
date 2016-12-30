@@ -14,7 +14,7 @@ block content
 				ul.list-of-agencies.agencies-by-sent
 					- each agency in agenciesBySentMetaStatus
 						li
-							a(href='/solicitudes-enviadas/?criteria={"entidad":"'+agency.name+'"}')=agency.name
+							a(href='/solicitudes-enviadas/?criteria={"entidad":"'+agency.name+'","colapsar":true}')=agency.name
 			div.col-md-6
 				div.extra-info-holder
 					h3 Las que más responden
@@ -22,5 +22,5 @@ block content
 				ul.list-of-agencies.agencies-by-answered
 					- each agency in agenciesByAnsweredMetaStatus
 						li
-							a(href='/solicitudes-enviadas/?criteria={"entidad":"'+agency.name+'"}')=agency.name
+							a(href='/solicitudes-enviadas/?criteria={"entidad":"'+agency.name+'","colapsar":true}')=agency.name
 		hr

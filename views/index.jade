@@ -45,7 +45,8 @@ block content
 					ul.agencies(data-agencies=agencies)
 						- each agency in agencies
 							li
-								h4=agency.name
+								a(href='/solicitudes-enviadas/?criteria={"entidad":"'+agency.name+'","colapsar":true}')
+									h4=agency.name
 				hr.hidden-sm.hidden-md.hidden-lg
 				div.col-md-6
 					h4 Últimas solicitudes enviadas

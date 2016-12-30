@@ -377,6 +377,23 @@ h1.pidelainfo {
 .browse-questions-holder {
 	min-height: 500px;
 }
+.browse-questions-holder h1.pidelainfo {
+	display: inline-block;
+	vertical-align: top;
+}
+.browse-questions-holder .show-search-form {
+	display: inline-block;
+	position: relative;
+	left: 10px;
+	vertical-align: top;
+	top: 29px;
+}
+.browse-questions-holder .remark {
+	font-weight: bold;
+}
+.browse-questions-holder .results {
+	min-height: 200px;
+}
 .browse-questions-holder .question a:hover h4 {
 	text-decoration: underline;
 }

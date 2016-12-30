@@ -9,9 +9,11 @@ block content
 			a.close(href="#",data-dismiss="alert" aria-label="close") &times; 
 			| Hubo un error con tu búsqueda, por favor intentalo de nuevo.
 		h1.pidelainfo Solicitudes enviadas
-		p Usa el formulario para buscar por Entidad o Palabra clave. Luego dale clic a Buscar.
+		button.btn.btn-xs.btn-success.show-search-form.js-show-search-form-btn Mostrar formulario 
+			i.fa.fa-caret-down.fa-lg
 		div.search-holder.js-search-holder
 			form.js-question-search-form(action="/")
+				p Usa el formulario para buscar por Entidad o Palabra clave. Luego dale clic a Buscar.
 				div.form-group
 					label(for='ctaFormAgency') Entidad 
 					select.form-control.js-agencies-list(name='agency')
@@ -24,7 +26,7 @@ block content
 					input.btn.btn-info.pidelainfo(type="submit",value="Buscar")
 			hr
 			div.form-group
-				p Puedes filtrar los resultados. 
+				p.js-criteria-explanation criteria explanation
 				div.btn-group.btn-group-sm(data-toggle="buttons")
 					label.btn.btn-success.active.js-btn-filter-reset
 						input(type="radio",name="statuses",autocomplete="off")
