@@ -37,11 +37,11 @@ block content
 					label.btn.btn-success.js-btn-filter(data-filter-type="sent")
 						input(type="radio",name="statuses",autocomplete="off")
 						| Por responder
+			hr
 		div.results.js-questions(data-parsed-agencies=parsedAgencies,data-questions=questions)
 			- each question in questions
 				div.question.js-question(data-id=question.id,data-title=question.title,data-agency-name=parsedAgencies[question.agencyId],data-status=question.status)
 					a(href="/solicitudes/" + question.id + "/" + question.slug)
-						span.pi-icon.pi-icon-lg(class="pi-icon-#{question.status}") 
 						h4=question.title
 						span.for=parsedAgencies[question.agencyId]
 						p=question.formattedDate

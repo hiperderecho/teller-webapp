@@ -729,8 +729,6 @@ module.exports = function ( app ) {
 		ajaxOptions.data   = data;
 
 		if ( data.authorSecret && data.status ) {
-			console.log( 'Valid form', ajaxOptions );
-
 			$.ajax( ajaxOptions )
 			.then( function ( result ) {
 
@@ -832,7 +830,7 @@ module.exports = function () {
 	var domChunk;
 
 	domChunk = h('div', { attributes: { 'class': 'no-results-search' } }
-	            , [ h('h4', [ 'No encontramos una pregunta parecida' ] )
+	            , [ h('h4', [ 'No encontramos una solicitud parecida' ] )
 	              , h('a', { attributes: { 'href': '/nueva-solicitud' } }, [ 'Puedes enviar una ' ] )
 	              , h('span', [ 'o ' ] )
 	              , h('a', { attributes: { 'href': '/solicitudes-enviadas' } }, [ 'puedes hacer otra búsqueda.' ])
@@ -849,8 +847,8 @@ module.exports = function () {
 
 	domChunk = h('div', { attributes: { 'class': 'no-results-search' } }
 	            , [ h('h4', [ 'No hay resultados' ] )
-	              , h('p', ['Puedes revisar ', h('a', { attributes: { 'href': '/solicitudes-enviadas' } }, [ 'todas las preguntas' ] ) ] )
-	              , h('p', ['o puedes ', h('a', { attributes: { 'href': '/nueva-solicitud' } }, [ 'enviar una pregunta' ] ) ] )
+	              , h('p', ['Puedes revisar ', h('a', { attributes: { 'href': '/solicitudes-enviadas' } }, [ 'todas las solicitudes' ] ) ] )
+	              , h('p', ['o puedes ', h('a', { attributes: { 'href': '/nueva-solicitud' } }, [ 'enviar una solicitud' ] ) ] )
 	              ]
 	            );
 
@@ -881,8 +879,7 @@ module.exports = function ( question, agencies ) {
 	moment.tz.setDefault('America/Lima');
 	domChunk = h('div', { attributes: { 'data-id': question.id, 'class': 'question js-question', 'data-title': question.id } }
 	            , [ h('a', { attributes: { 'href': '/solicitudes/' + question.id + '/' + getSlug( question.title ) } }
-	                 , [ h('span.pi-icon.pi-icon-lg.pi-icon-' + question.status, [ ' ' ] )
-	                   , h('h4', [ question.title ] )
+	                 , [ h('h4', [ question.title ] )
 	                   , h('span.for', [ agencies[ question.agencyId ] || question.agencyId ] )
 	                   , h('p', [ moment( question.createdAt ).fromNow() ] )
 	                   ]

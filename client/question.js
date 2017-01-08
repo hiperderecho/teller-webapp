@@ -83,8 +83,6 @@ module.exports = function ( app ) {
 		ajaxOptions.data   = data;
 
 		if ( data.authorSecret && data.status ) {
-			console.log( 'Valid form', ajaxOptions );
-
 			$.ajax( ajaxOptions )
 			.then( function ( result ) {
 
