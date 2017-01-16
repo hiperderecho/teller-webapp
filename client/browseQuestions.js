@@ -49,17 +49,18 @@ module.exports = function ( app ) {
 		var agency = criteria['agency'] || criteria['entidad'];
 		var q      = criteria['q'];
 		var toReturn;
+		var questionsCount = $('div.question').toArray().length;
 
 		if ( !Object.keys( criteria ).length ) {
-			toReturn = 'Mostrando <span class="remark">la primera página</span> de todas las Solicitudes';
+			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en <span class="remark">la primera página</span> de todas las Solicitudes';
 		} else if ( page && !agency && !q ) {
-			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de todas las Solicitudes';
+			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de todas las Solicitudes';
 		} else if ( agency && q ) {
-			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de las solicitudes enviadas a la entidad <span class="remark">' + agency + '</span> usando la palabra clave <span class="remark">'+ q +'</span>';
+			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span> usando la palabra clave <span class="remark">'+ q +'</span>';
 		} else if ( agency ) {
-			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de las solicitudes enviadas a la entidad <span class="remark">' + agency + '</span>';
+			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span>';
 		} else if ( q ) {
-			toReturn = 'Mostrando la página <span class="remark">'+ page +'</span> de las solicitudes enviadas que coinciden con la palabra clave <span class="remark">' + q +'</span>';
+			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas que coinciden con la palabra clave <span class="remark">' + q +'</span>';
 		}
 		if ( filter ) {
 			toReturn += ' y filtrando por <span class="remark">'+ filter +'</span>';
@@ -70,7 +71,7 @@ module.exports = function ( app ) {
 
 	testValidSearchCriteria = function ( criteriaKey ) {
 
-		return !_.includes( ['page','pagina','q','entidad','agency','collapse','colapsar'], criteriaKey )
+		return !_.includes( ['page','pagina','q','entidad','agency','collapse','colapsar'], criteriaKey );
 	};
 
 	populateFilterData = function () {

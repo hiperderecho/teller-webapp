@@ -215,8 +215,8 @@ h1.pidelainfo {
 	vertical-align: top;
 }
 .index-holder .part-3 .question span.for {
-	display: inline-block;
-	margin: 0 0 0 5px;
+	display: block;
+	margin: 0;
 	vertical-align: top;
 }
 .index-holder .part-3 .question span.for:before {
