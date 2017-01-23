@@ -63,16 +63,22 @@ module.exports = function ( app ) {
 		var toReturn;
 		var questionsCount = $('div.question').toArray().length;
 
+		// TODO: refactor this
 		if ( !Object.keys( criteria ).length ) {
-			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en <span class="remark">la primera página</span> de todas las Solicitudes';
+			toReturn = questionsCount !== 1 ? 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en <span class="remark">la primera página</span> de todas las Solicitudes'
+			                                : 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitud en <span class="remark">la primera página</span> de todas las Solicitudes';
 		} else if ( page && !agency && !q ) {
-			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de todas las Solicitudes';
+			toReturn = questionsCount !== 1 ? 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de todas las Solicitudes'
+			                                : 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitud en la página <span class="remark">'+ page +'</span> de todas las Solicitudes';
 		} else if ( agency && q ) {
-			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span> usando la palabra clave <span class="remark">'+ q +'</span>';
+			toReturn = questionsCount !== 1 ? 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span> usando la palabra clave <span class="remark">'+ q +'</span>'
+			                                : 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitud en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span> usando la palabra clave <span class="remark">'+ q +'</span>';
 		} else if ( agency ) {
-			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span>';
+			toReturn = questionsCount !== 1 ? 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span>'
+			                                : 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitud en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas a la entidad <span class="remark">' + agency + '</span>';
 		} else if ( q ) {
-			toReturn = 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas que coinciden con la palabra clave <span class="remark">' + q +'</span>';
+			toReturn = questionsCount !== 1 ? 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitudes en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas que coinciden con la palabra clave <span class="remark">' + q +'</span>'
+			                                : 'Mostrando <span class="remark">'+ questionsCount +'</span> Solicitud en la página <span class="remark">'+ page +'</span> de las Solicitudes enviadas que coinciden con la palabra clave <span class="remark">' + q +'</span>';
 		}
 		if ( filter ) {
 			toReturn += ' y filtrando por <span class="remark">'+ filter +'</span>';
